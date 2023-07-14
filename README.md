@@ -1,1 +1,23 @@
-# middle.messenger.praktikum.yandex
+Фигма: https://www.figma.com/file/OFXqxUGWHCulIODdyhkUzO/Untitled?type=design&node-id=0%3A1&mode=design&t=7FK0MthVnhgx2nnR-1
+
+Ссылка с netlify: 
+
+Запуск сервера: npm run start
+
+Запуск сборки в режиме разработки: npm run dev
+
+Сборка проекта: npm run build
+
+## Страницы:
+
+Авторизация - /
+
+Настройки пользователя - /profile
+
+Регистрация - /registration
+
+Ошибка 500 - /500
+
+Список чатов и лента переписки - /chats
+
+Страница 404 - остальные руты
