@@ -10,26 +10,28 @@ const profile = (props) => {
                     <img class="profile__info-photo" src="${Avatar}" alt="avatar"/>
                     <p class="u-center-text u-margin-bottom">{{profile.name}}</p>
                 </div>
-                {{#each profileFields}}
-                    <div class="info-block__item">
-                        ${Input({
-                            label: "{{label}}",
-                            type: "{{type}}",
-                            name: "{{name}}",
-                            value: "{{value}}"
-                        })}
+                <form>
+                    {{#each profileFields}}
+                        <div class="info-block__item">
+                            ${Input({
+                                label: "{{label}}",
+                                type: "{{type}}",
+                                name: "{{name}}",
+                                value: "{{value}}"
+                            })}
+                        </div>
+                    {{/each}}
+                    <div class="profile__actions">
+                        <div class="u-center-text">
+                        <button class="btn btn--blue" type="submit">Изменить данные</button>
                     </div>
-                {{/each}}
-                <div class="profile__actions">
+                    <div class="u-center-text ">
+                        <button class="btn btn--blue" type="submit">Изменить пароль</button>
+                    </div>
                     <div class="u-center-text">
-                    <button class="btn btn--blue" type="submit">Изменить данные</button>
-                </div>
-                <div class="u-center-text ">
-                    <button class="btn btn--blue" type="submit">Изменить пароль</button>
-                </div>
-                <div class="u-center-text">
-                    <button class="btn btn--red" type="submit">Выйти</button>
-                </div>
+                        <button class="btn btn--red" type="submit">Выйти</button>
+                    </div>
+                </form>
             </div>
         </div>
     `

@@ -70,12 +70,13 @@ const chatTmpl = (props) => {
                     {{/each}}
                 </div>
                 
-                <div class="chat-dialog__footer">
+                <form class="chat-dialog__footer">
                     <div class="attach">
                        <a class="round-btn">
                             <img src="${Add_Plus}" alt="add"/>
                         </a>
                     </div>
+             
                     <div class="chat-dialog__footer-input">
                       <input name="message" class="message-input" type="text" placeholder="Сообщение"/>
                     </div>
@@ -84,7 +85,7 @@ const chatTmpl = (props) => {
                             <img src="${Arrow_Right}" alt="send"/>
                         </a>
                     </div>
-            </div>
+                </form> 
         </div>
     `
     const template = Handlebars.compile(chatTmpl);
