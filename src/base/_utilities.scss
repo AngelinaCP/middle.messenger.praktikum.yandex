@@ -1,0 +1,42 @@
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-top {
+  margin-top: 4rem;
+}
+
+.u-margin-top-big {
+  margin-top: 10rem;
+}
+
+.u-margin-bottom {
+  margin-bottom: 4rem;
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 10rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 1rem 7rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+.btn--blue {
+  background-color: $color-blue-dark;
+  color: $color-white;
+}
+
+.btn--red {
+  background-color: $color-red;
+  color: $color-white;
+}
+
+.btn--white {
+  color: $color-blue-dark;
+  background-color: $color-white;
+}

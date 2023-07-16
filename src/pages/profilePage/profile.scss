@@ -1,0 +1,45 @@
+.profile {
+
+  width: 55rem;
+  position: relative;
+  height: 100vh;
+  margin: 0 auto;
+
+  &__settings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__info {
+    font-size: 2rem;
+
+    &-photo {
+      width: 13rem;
+      height: 13rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__items {
+
+  }
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.info-block__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 0.5rem;
+}
