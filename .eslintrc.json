@@ -18,9 +18,8 @@
         "@typescript-eslint/restrict-template-expressions": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-this-alias": "off"
-
-
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/dot-notation": "off"
     },
     "plugins": [
         "@typescript-eslint"

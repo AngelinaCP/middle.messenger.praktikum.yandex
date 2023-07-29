@@ -33,6 +33,18 @@ export default class ProfilePage extends Block {
           }
         }
       });
+    this._children.displayNameInput = new Input(
+      {
+        class: 'card__input',
+        name: 'display_name',
+        type: 'text',
+        placeholder: 'Имя в чате',
+        blur: (e: FocusEvent) => {
+          if (e) {
+            validate(e, 'displayName');
+          }
+        }
+      });
     this._children.emailInput = new Input(
       {
         class: 'card__input',

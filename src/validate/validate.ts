@@ -52,6 +52,10 @@ export const isValid = (type: string) => {
       regExp = /^\w{1,}/;
       errorMsg = 'Сообщение не может быть пустым';
       break;
+    case 'displayName':
+      regExp = /^\w{1,}/;
+      errorMsg = 'Поле не может быть пустым';
+      break;
   }
   return { regExp, errorMsg };
 };
