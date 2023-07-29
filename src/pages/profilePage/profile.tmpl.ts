@@ -1,7 +1,7 @@
 import Avatar from '../../../public/avatar.png';
 
 export const profileTemplate = () => {
-    return `
+  return `
               <div class="profile__settings">
                   <div class="profile__info">
                       <img class="profile__info-photo" src="${Avatar}" alt="avatar"/>
@@ -35,5 +35,5 @@ export const profileTemplate = () => {
                   </form>
               </div>
           
-  `
+  `;
 };

@@ -1,11 +1,10 @@
 import Add_Plus from '../../../public/Add_Plus.png';
 import Arrow_Right from '../../../public/Arrow_Right_SM.png';
 import Avatar from '../../../public/avatar.png';
-import More_Vertical from '../../../public/More_Vertical.png'
-
+import More_Vertical from '../../../public/More_Vertical.png';
 
 export const ChatDialogTemplate = () => {
-    return `
+  return `
                 <div class="chat-dialog__header">
                     <div class="chat-dialog__header-info">
                         <img class="avatar" src="${Avatar}" alt="avatar"/>
@@ -46,5 +45,5 @@ export const ChatDialogTemplate = () => {
                             <img src="${Arrow_Right}" alt="send"/>
                         </a>
                 </form>
-    `
-}
+    `;
+};

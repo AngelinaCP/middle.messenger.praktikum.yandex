@@ -1,7 +1,7 @@
-import Avatar from '../../../public/avatar.png'
+import Avatar from '../../../public/avatar.png';
 
 export const ChatListTemplate = () => {
-    return `
+  return `
         <div class="sidebar__header">
                     <h2 class="profile-link">Профиль</h2>
                     <div class="sidebar__search-field">
@@ -37,5 +37,5 @@ export const ChatListTemplate = () => {
                         {{/each}}
                     </div>
                 </div>
-    `
-}
+    `;
+};

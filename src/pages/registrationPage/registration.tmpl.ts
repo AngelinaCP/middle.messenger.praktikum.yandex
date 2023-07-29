@@ -1,6 +1,5 @@
-
 export const registrationTemplate = () => {
-    return `
+  return `
          <div class="card">
                 <div class="u-center-text u-margin-bottom u-margin-top">
                     <h2 class="card__header">{{title}}</h2>
@@ -34,6 +33,5 @@ export const registrationTemplate = () => {
                     </div>
                 </form>
           </div>
-    `
+    `;
 };
-
