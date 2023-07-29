@@ -13,6 +13,9 @@ export const profileTemplate = () => {
                             {{{emailInput}}}
                         </div>
                         <div class="card__field">
+                            {{{displayNameInput}}}
+                        </div>
+                        <div class="card__field">
                             {{{loginInput}}}
                         </div>
                         <div class="card__field">         
