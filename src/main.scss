@@ -1,12 +1,76 @@
+$color-grey-light: #eee;
+$color-grey-dark: #aba6a6;
+$color-blue-dark: #646cff;
+$color-white: #fff;
+$color-red: #ef3535;
+$default-font-size: 1.6rem;
+$navbar-height: 50px;
 
-@import "abstracts/variables";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
 
-@import "base/base";
-@import "base/utilities";
+  /* all other elements will inherit this property */
+  box-sizing: inherit;
+}
 
-@import "components/card";
-@import "components/ErrorInfo/ErrorInfo";
-@import "pages/chatPage/chat";
-@import "pages/profilePage/profile";
+html {
+  /* 62% of the default browser font-size 16px */
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100vh;
+}
+
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-top {
+  margin-top: 4rem;
+}
+
+.u-margin-top-big {
+  margin-top: 10rem;
+}
+
+.u-margin-bottom {
+  margin-bottom: 4rem;
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 10rem;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 1rem 7rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+.btn--blue {
+  background-color: $color-blue-dark;
+  color: $color-white;
+}
+
+.btn--red {
+  background-color: $color-red;
+  color: $color-white;
+}
+
+.btn--white {
+  color: $color-blue-dark;
+  background-color: $color-white;
+}
+
 
 
