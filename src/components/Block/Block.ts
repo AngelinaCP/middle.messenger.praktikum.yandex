@@ -61,7 +61,6 @@ export class Block {
     this.componentDidMount();
   }
 
-  // Может переопределять пользователь, необязательно трогать
   componentDidMount () {}
 
   dispatchComponentDidMount () {
@@ -73,10 +72,8 @@ export class Block {
     if (response) {
       this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
-    //   this._render();
   }
 
-  // Может переопределять пользователь, необязательно трогать
   componentDidUpdate (oldProps: Props, newProps: Props) {
     return oldProps !== newProps;
   }
