@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": ["standard-with-typescript"],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["tsconfig.json"]
+    },
+    "rules": {
+        "semi": ["warn", "always"],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/semi": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/restrict-template-expressions": "off",
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/dot-notation": "off"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ]
+}
+
