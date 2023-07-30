@@ -5,7 +5,7 @@ import { validate } from '../../validate/validate';
 
 export default class ChatDialog extends Block {
   constructor () {
-    super('div');
+    super('div', {});
   }
 
   init () {

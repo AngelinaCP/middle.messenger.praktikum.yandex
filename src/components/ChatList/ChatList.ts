@@ -5,7 +5,7 @@ import ChatDialog from '../ChatDialog/ChatDialog';
 
 export default class ChatList extends Block {
   constructor () {
-    super('div');
+    super('div', {});
   }
 
   init () {

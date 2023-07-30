@@ -2,9 +2,7 @@ import Handlebars, { type TemplateDelegate } from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
 import { EventBus } from '../../services/EventBus';
 
-export type Props = Record<string, any>;
-
-export class Block {
+export class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -13,15 +11,15 @@ export class Block {
   };
 
   _element: HTMLElement;
-  _meta: Record<string, any>;
-  _props;
-  _children;
+  _meta;
+  _props: Props;
+  _children: Record<string, Block>;
   _id: string;
   _setUpdate = false;
   _eventBus;
   _events: Record<string, any> = {};
 
-  constructor (tagName = 'template', propsAndChildren: Props = {}) {
+  constructor (tagName = 'template', propsAndChildren: Props) {
     const { props, children } = this.getChildren(propsAndChildren);
     const eventBus = new EventBus();
     this._eventBus = () => eventBus;
@@ -30,8 +28,8 @@ export class Block {
       props
     };
     this._id = uuidv4();
-    this._children = this._makePropsProxy(children);
-    this._props = this._makePropsProxy({ ...props });
+    this._children = children;
+    this._props = this._makePropsProxy(props);
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -101,7 +99,7 @@ export class Block {
     }
   };
 
-  _isObject (obj: Record<string, any>) {
+  _isObject (obj: Props) {
     return typeof obj === 'object' && obj !== null;
   }
 
@@ -130,15 +128,15 @@ export class Block {
   _makePropsProxy (props: Props) {
     const self = this;
     return new Proxy(props, {
-      set (target, prop, value) {
-        if (!self._deepDiff(target[prop as string], value)) {
-          target[prop as string] = value;
+      set (target, prop: string, value) {
+        if (!self._deepDiff(target[prop], value)) {
+          target[prop as keyof Props] = value;
           self._setUpdate = true;
         }
         return true;
       },
-      get (target, prop) {
-        const value = target[prop as string];
+      get (target, prop: string) {
+        const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
       deleteProperty (): boolean {
@@ -151,9 +149,9 @@ export class Block {
     return this._element;
   }
 
-  getChildren (propsAndChildren: Props) {
-    const children: Props = {};
-    const props: Props = {};
+  getChildren (propsAndChildren: Record<string, any>) {
+    const children: Record<string, any> = {};
+    const props: Record<string, any> = {};
 
     Object.keys(propsAndChildren).forEach((key) => {
       if (propsAndChildren[key] instanceof Block) {
@@ -162,7 +160,7 @@ export class Block {
         props[key] = propsAndChildren[key];
       }
     });
-    return { props, children };
+    return { props: props as Props, children };
   }
 
   render () {
@@ -214,7 +212,7 @@ export class Block {
     return element;
   }
 
-  compile (template: string | TemplateDelegate, props: Props) {
+  compile (template: string | TemplateDelegate, props: Record<string, any>) {
     if (typeof props === 'undefined') {
       props = this._props;
     }
