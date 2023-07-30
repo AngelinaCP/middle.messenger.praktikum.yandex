@@ -35,7 +35,8 @@ window.addEventListener('DOMContentLoaded', () => {
       page = new ErrorInfo({
         code: '500',
         message: 'Уже фиксим',
-        linkText: 'Вернуться обратно'
+        linkText: 'Вернуться обратно',
+        class: 'error-block'
       });
       root.append(page.getContent()!);
       break;
@@ -43,7 +44,8 @@ window.addEventListener('DOMContentLoaded', () => {
       page = new ErrorInfo({
         code: '400',
         message: 'Не туда попали',
-        linkText: 'Вернуться обратно'
+        linkText: 'Вернуться обратно',
+        class: 'error-block'
       });
       root.append(page.getContent()!);
       break;

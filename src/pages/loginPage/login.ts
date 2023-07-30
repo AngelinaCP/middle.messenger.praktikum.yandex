@@ -7,7 +7,7 @@ import './login.scss';
 
 export default class LoginPage extends Block {
   constructor () {
-    super('div');
+    super('div', {});
   }
 
   init () {

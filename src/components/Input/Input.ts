@@ -10,7 +10,7 @@ interface InputProps {
   click?: (e: FocusEvent) => void
 }
 
-export default class Input extends Block {
+export default class Input extends Block<InputProps> {
   constructor (props: InputProps) {
     super('input', props);
   }

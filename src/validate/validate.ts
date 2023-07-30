@@ -25,7 +25,7 @@ export const profileValid = (fields: AuthFieldsProps): boolean => {
 
 export const isValid = (type: string) => {
   let regExp;
-  let errorMsg;
+  let errorMsg = '';
 
   switch (type) {
     case 'email':
@@ -69,13 +69,12 @@ export const validate = (event: string | FocusEvent, type: string) => {
 
   const { regExp, errorMsg } = isValid(type);
 
-  if (regExp?.test(value)) {
-    return true;
-  }
+  const isValidValue = regExp?.test(value);
+
   if (event instanceof FocusEvent) {
     const target = event.target as HTMLInputElement;
-    target.setCustomValidity(errorMsg ?? '');
+    target.setCustomValidity(isValidValue ? '' : errorMsg);
     target.reportValidity();
   }
-  return false;
+  return isValidValue;
 };

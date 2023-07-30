@@ -6,19 +6,17 @@ interface ErrorInfoProps {
   code: string
   message: string
   linkText: string
+  class: string
 }
 
-export default class ErrorInfo extends Block {
+export default class ErrorInfo extends Block<ErrorInfoProps> {
   constructor (props: ErrorInfoProps) {
     super('div', {
       code: props.code,
       message: props.message,
-      linkText: props.linkText
+      linkText: props.linkText,
+      class: props.class
     });
-  }
-
-  init () {
-    this._props.class = 'error-block';
   }
 
   render () {

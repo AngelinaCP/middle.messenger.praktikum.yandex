@@ -5,7 +5,7 @@ export const loginTemplate = () => {
                     <h2 class="card__header">{{title}}</h2>
                 </div>
                 <form>
-                     <div class="u-center-text ">
+                     <div class="u-center-text">
                         <div class="card__field">
                             {{{loginInput}}}
                         </div>
