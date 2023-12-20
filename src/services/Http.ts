@@ -12,7 +12,7 @@ type HTTPMethod = (url: string, options?: unknown) => Promise<XMLHttpRequest>
 interface Options {
     timeout?: number
     headers?: Record<string, string>
-    data?: any
+    data?: unknown
     method: METHODS
 }
 

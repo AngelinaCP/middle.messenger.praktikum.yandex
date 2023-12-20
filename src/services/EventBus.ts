@@ -1,5 +1,5 @@
 
-type callbackType = (data?: any) => void;
+type callbackType = (data?: unknown) => void;
 
 export class EventBus {
   listeners: Record<string, Array<((...args: any[]) => void)>> = {};

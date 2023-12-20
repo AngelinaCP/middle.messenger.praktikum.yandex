@@ -2,9 +2,9 @@ import {BlockClass, Route} from "./Route";
 
 class Router {
     static __instance: any;
-    routes: any[];
+    routes: Route[];
     history: History;
-    _currentRoute: null;
+    _currentRoute: Route | null = null;
 
     constructor() {
         if (Router.__instance) {
@@ -37,8 +37,8 @@ class Router {
             return;
         }
         this._currentRoute = route
-
-        route.render(route, pathname);
+        route.render()
+        // route.render(route, pathname);
     }
 
     go(pathname: string) {

@@ -9,11 +9,11 @@ class AuthApi extends BaseAPI {
         this._http = new HTTP('/auth')
     }
 
-    public signup(data: any): Promise<XMLHttpRequest> {
+    public signup(data: unknown): Promise<XMLHttpRequest> {
         return this._http.post('/signup', data)
     }
 
-    public signin(data: any): Promise<XMLHttpRequest> {
+    public signin(data: unknown): Promise<XMLHttpRequest> {
         return this._http.post('/signin', data)
     }
 

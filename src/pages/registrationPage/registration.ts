@@ -26,7 +26,11 @@ export default class RegistrationPage extends Block {
       {
         class: 'btn btn--white',
         label: 'Войти',
-        type: 'submit'
+        type: 'submit',
+        click: (e: MouseEvent) => {
+            e.preventDefault()
+            router.go('/login')
+        }
       });
     this._children.loginInput = new Input(
       {

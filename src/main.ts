@@ -19,7 +19,8 @@ window.addEventListener('DOMContentLoaded',  async () => {
             .catch(() => router.go('/'));
         router.start()
         await ChatController.getChats()
+        // router.go('/chats')
    } catch(e) {
-
+        // router.go('/login')
     }
 });

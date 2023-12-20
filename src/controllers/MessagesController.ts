@@ -66,7 +66,7 @@ class MessagesController {
 
     }
 
-    async getMessage(id: number, message: Message | Message[] ) {
+    async getMessage(id: number, message: unknown) {
         const newMessages = Array.isArray(message)
             ? message.reverse()
             : [message]

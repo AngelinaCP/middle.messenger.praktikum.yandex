@@ -5,7 +5,7 @@ export interface BlockClass<B extends Record<string, any> = any> {
 }
 
 export class Route {
-    _pathname: any;
+    _pathname: string;
     _blockClass: BlockClass;
     _block: Block | null = null;
     _rootQuery: string;
