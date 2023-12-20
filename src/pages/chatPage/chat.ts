@@ -3,7 +3,8 @@ import { chatTemplate } from './chat.tmpl';
 import ChatDialog from '../../components/ChatDialog';
 import './chat.scss';
 import ChatsList from  "../../components/ChatList";
-import authController from "../../controllers/AuthController";
+import {ChatController} from "../../controllers";
+import store from "../../services/Store";
 
 export default class ChatPage extends Block {
   constructor () {
@@ -14,10 +15,9 @@ export default class ChatPage extends Block {
     this._props.class = 'content-page';
     this._children.chatList = new ChatsList({}, 'div');
     this._children.chatDialog = new ChatDialog({}, 'div');
-  }
-
-  componentDidMount() {
-    authController.getUserInfo()
+    if (!store.getState().chatList) {
+      ChatController.getChats()
+    }
   }
 
   render () {

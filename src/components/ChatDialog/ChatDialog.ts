@@ -82,8 +82,8 @@ export class ChatDialog extends Block {
           const chatId = this._props.selectedChat
           ChatController.deleteUser(userId, chatId)
               .then(() => ChatController.getChatUsers(chatId))
-              .catch((e) => {
-                  alert(e.response.reason)
+              .catch(() => {
+                  alert("Не удалось удалить пользователя")
               })
       }
   }

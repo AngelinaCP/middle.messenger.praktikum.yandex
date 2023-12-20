@@ -110,8 +110,8 @@ export default class RegistrationPage extends Block {
     const form = this._element.querySelector('form') as HTMLFormElement;
     const formData = new FormData(form);
 
-    AuthController.signup(formData).then(() => {
-            router.go('/messenger')
+    AuthController.signup(formData).then(async() => {
+        router.go('/messenger')
       }).catch((err) => {
         this.setProps({
             error: err.response.reason

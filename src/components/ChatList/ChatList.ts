@@ -7,6 +7,7 @@ import Chat from "../Chat";
 import Link from "../Link/Link";
 import {getAvatarStub} from "../../utils/utils";
 import {Chats} from "../../controllers/ChatController";
+import store from "../../services/Store";
 
 export class ChatList extends Block {
   constructor () {
@@ -42,7 +43,7 @@ export class ChatList extends Block {
   }
 
   private getChatList() {
-      return this._props.chatList?.map((data: Chats) => {
+      return store.getState().chatList?.map((data: Chats) => {
           return new Chat({
               title: data.title,
               content: data.last_message?.content,

@@ -52,6 +52,10 @@ class MessagesController {
         })
     }
 
+    close() {
+        Array.from(this.sockets.values()).forEach((socket) => socket.close())
+    }
+
     async sendMessage(chatId: number, message: string) {
         const socket = this.sockets.get(chatId)
 

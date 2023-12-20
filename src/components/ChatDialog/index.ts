@@ -20,7 +20,7 @@ export default Connect(ChatDialog, state => {
         const hour = new Date(message.time).getHours();
         const min = new Date(message.time).getMinutes();
         const time =  `${hour + ':' +  min}`
-        const messageType = message.user_id === activeUser.id ? 'incoming' : 'outcoming'
+        const messageType = message.user_id === activeUser?.id ? 'incoming' : 'outcoming'
 
         return {
             ...message,
@@ -29,7 +29,7 @@ export default Connect(ChatDialog, state => {
         }
     })
 
-    const user = chatUsers?.find(user => user.id !== activeUser.id)
+    const user = chatUsers?.find(user => user.id !== activeUser?.id)
 
     return  {
         messages: messagesByChat,

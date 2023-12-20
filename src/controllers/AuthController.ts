@@ -2,6 +2,7 @@ import {AuthFieldsProps, isLoginValid, registrationValid} from "../validate/vali
 import store from "../services/Store";
 import {AuthApi} from "../api";
 import {router} from "../services";
+import {ChatController, MessagesController} from "./index";
 
 export interface User {
     id: number,
@@ -26,7 +27,9 @@ class AuthController {
             throw new Error('')
         }
 
-        return await AuthApi.signin(formFields)
+        await AuthApi.signin(formFields)
+        await this.getUserInfo()
+        await ChatController.getChats()
     }
 
     public async signup(formData: FormData) {
@@ -38,11 +41,14 @@ class AuthController {
         if (!registrationValid(formFields as AuthFieldsProps)) {
             throw new Error('')
         }
-        return await AuthApi.signup(formFields)
+        await AuthApi.signup(formFields)
+        await this.getUserInfo()
     }
 
     public async logout() {
         await AuthApi.logout()
+        store.reset()
+        MessagesController.close()
         router.go('/')
     }
 
