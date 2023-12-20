@@ -38,6 +38,12 @@ class Store extends EventBus {
         super()
     }
 
+    public reset() {
+        Object.keys(this._state).map(key => {
+            this._state[key] = undefined
+        })
+    }
+
     public getState() {
         return this._state;
     }

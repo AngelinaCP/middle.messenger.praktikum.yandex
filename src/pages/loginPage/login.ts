@@ -67,7 +67,7 @@ export default class LoginPage extends Block {
       AuthController.signIn(formData).then(() => {
             router.go('/messenger')
       }).catch((err) => {
-          if (err.response.reason === "User already in system") {
+          if (err.response?.reason === "User already in system") {
               router.go("/messenger");
           }
           this.setProps({

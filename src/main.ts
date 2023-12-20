@@ -16,10 +16,9 @@ window.addEventListener('DOMContentLoaded',  async () => {
       .use('/messenger', ChatPage)
     try {
         await AuthController.getUserInfo()
-            .catch(() => router.go('/'));
         router.start()
         await ChatController.getChats()
    } catch(e) {
-        router.go('/login')
+        router.go('/')
     }
 });
