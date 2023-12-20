@@ -11,7 +11,11 @@ class Link extends Block{
     constructor(props: LinkProps) {
         super({
                 ...props,
-                click: () => this.navigate()
+                click: (e: MouseEvent) => {
+                    e.preventDefault()
+                    console.log('inClick');
+                    this.navigate()
+                }
             }, 'a'
         )
     }

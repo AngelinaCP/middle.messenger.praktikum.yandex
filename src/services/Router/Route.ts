@@ -17,13 +17,6 @@ export class Route {
         this._rootQuery = rootQuery;
     }
 
-    navigate(pathname: string) {
-        if (this.match(pathname)) {
-            this._pathname = pathname;
-            this.render();
-        }
-    }
-
     match(pathname: string) {
         return pathname === this._pathname
     }

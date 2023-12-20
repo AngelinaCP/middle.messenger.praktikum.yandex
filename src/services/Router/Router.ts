@@ -38,20 +38,11 @@ class Router {
         }
         this._currentRoute = route
         route.render()
-        // route.render(route, pathname);
     }
 
     go(pathname: string) {
         this.history.pushState({}, "", pathname)
         this._onRoute(pathname)
-    }
-
-    back() {
-        this.history.back()
-    }
-
-    forward() {
-        this.history.forward()
     }
 
     getRoute(pathname: string) {

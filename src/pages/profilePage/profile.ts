@@ -11,6 +11,7 @@ import store from "../../services/Store";
 import Avatar from "../../components/Avatar";
 import {getAvatarStub} from "../../utils/utils";
 import {AuthController} from "../../controllers";
+import Link from "../../components/Link/Link";
 
 
 const profileFields: Record<string, string> = {
@@ -30,6 +31,10 @@ export class ProfilePage extends Block {
   init () {
     this._props.class = 'profile';
     this._props.dataChangedMessage = ''
+    this._children.backLink = new Link({
+        label: 'Вернуться назад',
+        to: '/messenger'
+    })
     this._children.changeUserInfo = new Button(
       {
         class: 'btn btn--blue',

@@ -1,9 +1,11 @@
 
 export const profileTemplate = () => {
   return `
-              <div class="profile__settings">
+                  <div class="profile__back">
+                       {{{backLink}}}
+                  </div>
+                  <div class="profile__settings profile__info">   
                   <form>
-                  <div class="profile__info">   
                       <div class="u-center-text">             
                         {{{avatar}}}
                       </div>
@@ -13,7 +15,6 @@ export const profileTemplate = () => {
                       <div class="u-center-text u-margin-top-small">
                         {{{changeAvatarInput}}}   
                       </div>
-                  </div>
                   </form>
                   <form class="fields-form">
                       <div class="info-block__item" >
@@ -44,7 +45,6 @@ export const profileTemplate = () => {
                           {{{logout}}}
                       </div>
                   </form>
-              </div>
-          
+              </div>   
   `;
 };
