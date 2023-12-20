@@ -6,6 +6,7 @@ import Button from "../Button";
 import Chat from "../Chat";
 import Link from "../Link/Link";
 import {getAvatarStub} from "../../utils/utils";
+import {Chats} from "../../controllers/ChatController";
 
 export class ChatList extends Block {
   constructor () {
@@ -35,13 +36,13 @@ export class ChatList extends Block {
   }
 
 
-  componentDidUpdate(oldProps: any, newProps: any): boolean {
+  componentDidUpdate(): boolean {
       this._children.chatList = this.getChatList()
       return true;
   }
 
   private getChatList() {
-      return this._props.chatList?.map((data) => {
+      return this._props.chatList?.map((data: Chats) => {
           return new Chat({
               title: data.title,
               content: data.last_message?.content,

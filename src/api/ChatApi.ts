@@ -38,7 +38,7 @@ class ChatAPI extends BaseAPI {
         return this._http.delete('/users', { users: [user], chatId});
     }
 
-    getChatUsers(chatId: string): Promise<XMLHttpRequest> {
+    getChatUsers(chatId: number): Promise<XMLHttpRequest> {
         return this._http.get(`/${chatId}/users`)
     }
 

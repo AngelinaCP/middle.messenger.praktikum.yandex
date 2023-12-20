@@ -3,7 +3,7 @@ import {Message} from "../../controllers/MessagesController";
 import {ChatDialog} from "./ChatDialog";
 
 export default Connect(ChatDialog, state => {
-    const selectedChat = state.selectedChat
+    const selectedChat: number = state.selectedChat
 
     if (!selectedChat) {
         return {
@@ -16,7 +16,7 @@ export default Connect(ChatDialog, state => {
     const chatUsers = state.chatUsers || []
     const activeUser = state.activeUser
 
-    const messagesByChat = (messages[selectedChat.toString()] || []).map((message: Message) => {
+    const messagesByChat = (messages[selectedChat.toString() as any] || []).map((message: Message) => {
         const hour = new Date(message.time).getHours();
         const min = new Date(message.time).getMinutes();
         const time =  `${hour + ':' +  min}`

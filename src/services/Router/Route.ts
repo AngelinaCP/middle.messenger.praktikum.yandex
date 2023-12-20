@@ -1,34 +1,39 @@
 import {Block} from "../../components/Block/Block";
-import {isEqual} from "../../utils/utils";
+
+export interface BlockClass<B extends Record<string, any> = any> {
+    new(): Block<B>;
+}
 
 export class Route {
     _pathname: any;
-    _blockClass: any;
-    _block: null;
-    _props: any;
+    _blockClass: BlockClass;
+    _block: Block | null = null;
+    _rootQuery: string;
 
-    constructor(pathname: string, view: Block, props) {
+    constructor(pathname: string, view: BlockClass, rootQuery: string) {
         this._pathname = pathname;
         this._blockClass = view;
         this._block = null;
-        this._props = props;
+        this._rootQuery = rootQuery;
     }
 
-    navigate(pathname) {
+    navigate(pathname: string) {
         if (this.match(pathname)) {
             this._pathname = pathname;
             this.render();
         }
     }
 
-    match(pathname) {
-        return isEqual(pathname, this._pathname);
+    match(pathname: string) {
+        return pathname === this._pathname
     }
 
-    private _render(query, block) {
+    private _render(query: string, block: any) {
         const root = document.querySelector(query);
-        root.innerHTML = '';
-        root.append(block.getContent());
+        if (root) {
+            root.innerHTML = '';
+            root.append(block.getContent());
+        }
         block.dispatchComponentDidMount();
 
         return root;
@@ -37,11 +42,10 @@ export class Route {
     render() {
         if (!this._block) {
             this._block = new this._blockClass();
-            this._render(this._props.rootQuery, this._block);
-
+            this._render(this._rootQuery, this._block);
             return;
         }
 
-        this._render(this._props.rootQuery, this._block);
+        this._render(this._rootQuery, this._block);
     }
 }

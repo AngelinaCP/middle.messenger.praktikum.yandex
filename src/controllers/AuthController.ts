@@ -3,11 +3,6 @@ import store from "../services/Store";
 import {AuthApi} from "../api";
 import {router} from "../services";
 
-interface LoginFormModel {
-    email: string;
-    password: string;
-}
-
 export interface User {
     id: number,
     first_name: string
@@ -22,9 +17,9 @@ export interface User {
 
 class AuthController {
     public async signIn(formData: FormData) {
-        const formFields =  {};
+        const formFields: Record<string, any> =  {};
         for (const [key, value] of formData.entries()) {
-            formFields[key] = value;
+            formFields[key as string] = value;
         }
 
         if (!isLoginValid(formFields as AuthFieldsProps)) {
@@ -35,9 +30,9 @@ class AuthController {
     }
 
     public async signup(formData: FormData) {
-        const formFields =  {};
+        const formFields: Record<string, any> =  {};
         for (const [key, value] of formData.entries()) {
-            formFields[key] = value;
+            formFields[key as string] = value;
         }
 
         if (!registrationValid(formFields as AuthFieldsProps)) {

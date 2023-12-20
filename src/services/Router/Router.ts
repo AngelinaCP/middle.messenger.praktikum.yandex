@@ -1,4 +1,4 @@
-import { Route } from "./Route";
+import {BlockClass, Route} from "./Route";
 
 class Router {
     static __instance: any;
@@ -17,8 +17,8 @@ class Router {
         Router.__instance = this;
     }
 
-    use(pathname, block) {
-        const route = new Route(pathname, block, {rootQuery: '.app'});
+    use(pathname: string, block: BlockClass) {
+        const route = new Route(pathname, block, '.app');
         this.routes.push(route);
         return this;
     }
@@ -30,7 +30,7 @@ class Router {
         this._onRoute(window.location.pathname)
     }
 
-    _onRoute(pathname) {
+    _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
 
         if (!route) {
@@ -41,7 +41,7 @@ class Router {
         route.render(route, pathname);
     }
 
-    go(pathname) {
+    go(pathname: string) {
         this.history.pushState({}, "", pathname)
         this._onRoute(pathname)
     }
@@ -54,7 +54,7 @@ class Router {
         this.history.forward()
     }
 
-    getRoute(pathname) {
+    getRoute(pathname: string) {
         return this.routes.find(route => route._pathname.match(pathname));
     }
 }

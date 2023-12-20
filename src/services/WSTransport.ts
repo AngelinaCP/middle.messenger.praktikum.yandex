@@ -9,15 +9,15 @@ export enum WSTransportEvents {
 
 export class WSTransport extends EventBus {
     private socket: WebSocket
-    private pingInterval
+    private pingInterval: ReturnType<typeof setInterval> | undefined
     _url: string
 
-    constructor(url) {
+    constructor(url: string) {
         super();
         this._url = url
     }
 
-    public send(data) {
+    public send(data: unknown) {
         if (!this.socket) {
             return
         }
@@ -44,7 +44,9 @@ export class WSTransport extends EventBus {
 
     public close() {
         this.socket.close()
-        clearInterval(this.pingInterval)
+        if (this.pingInterval) {
+            clearInterval(this.pingInterval)
+        }
     }
 
     private setupPing() {
@@ -53,7 +55,9 @@ export class WSTransport extends EventBus {
         }, 30000)
 
         this.on(WSTransportEvents.CLOSE, () => {
-            clearInterval(this.pingInterval)
+            if (this.pingInterval) {
+                clearInterval(this.pingInterval)
+            }
             this.pingInterval = undefined
         })
     }

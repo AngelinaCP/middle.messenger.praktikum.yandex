@@ -13,7 +13,7 @@ export interface State {
     chatUsers: User[]
 }
 
-export function Connect(Component: typeof Block, mapStateToProps: (state: State) => Partial<State>) {
+export function Connect<P extends Partial<any>>(Component: typeof Block<P>, mapStateToProps: (state: State) => P) {
     return class extends Component {
         constructor( props = {}, tag = 'div') {
             let oldState = mapStateToProps(store.getState())

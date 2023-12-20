@@ -9,7 +9,6 @@ import ProfileController from "../../controllers/ProfileController";
 import profileController from "../../controllers/ProfileController";
 import store from "../../services/Store";
 import Avatar from "../../components/Avatar";
-import avatar from "../../../public/avatar.png";
 import {getAvatarStub} from "../../utils/utils";
 import {AuthController} from "../../controllers";
 
@@ -90,10 +89,10 @@ export class ProfilePage extends Block {
     e.preventDefault();
     const form = (this._element.getElementsByClassName('fields-form'))[0] as HTMLFormElement;
     const formData = new FormData(form);
-    const formFields =  {}
+    const formFields: Record<string, any> =  {}
 
     for (const [key, value] of formData.entries()) {
-      formFields[key] = value;
+      formFields[key as string] = value;
     }
     if (profileValid(formFields as AuthFieldsProps)) {
         ProfileController.changeUserInfo(formFields as User)
@@ -115,16 +114,17 @@ export class ProfilePage extends Block {
       e.preventDefault();
       const form = (this._element.getElementsByClassName('fields-form'))[0] as HTMLFormElement;
       const formData = new FormData(form);
-      const formFields =  {}
+      const formFields: Record<string, any> =  {}
 
       for (const [key, value] of formData.entries()) {
           if (key === 'oldPassword' || key === 'newPassword') {
-              formFields[key] = value;
+              formFields[key as string] = value;
           }
       }
-      if (formFields['newPassword'] !== formFields['oldPassword']
-          && isPasswordValid(formFields['newPassword'])
-          && isPasswordValid(formFields['oldPassword'])) {
+
+      if (formFields['newPassword' as string] !== formFields['oldPassword' as string]
+          && isPasswordValid(formFields['newPassword' as string])
+          && isPasswordValid(formFields['oldPassword' as string])) {
           ProfileController.changeUserPassword(formFields)
               .then(() => {
                 this.setProps({
@@ -163,7 +163,7 @@ export class ProfilePage extends Block {
           ) || []
   }
 
-  componentDidUpdate(oldProps: any, newProps: any): boolean {
+  componentDidUpdate(): boolean {
       this._children.avatar = new Avatar({
           class: "profile__info-photo",
           src: getAvatarStub(store.getState().activeUser?.avatar),

@@ -27,7 +27,7 @@ function merge(lhs: State, rhs: State): State {
 
 class Store extends EventBus {
 
-    static _instance;
+    static _instance: Store;
     _state: any = {};
 
     constructor() {

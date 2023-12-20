@@ -27,7 +27,7 @@ class ChatController {
     public async getChats() {
         const data = await ChatApi.getChats()
 
-        data.response.map(async(chat) => {
+        data.response.map(async(chat : Chats) => {
             const data = await this.getToken(chat.id)
 
             if (data.token) {
@@ -49,11 +49,11 @@ class ChatController {
         await ChatApi.deleteUser(user, chatId)
     }
 
-    public selectChat(chatId: string) {
+    public selectChat(chatId: number) {
         store.set('selectedChat', chatId)
     }
 
-    public async getChatUsers(chatId: string) {
+    public async getChatUsers(chatId: number) {
         const data = await ChatApi.getChatUsers(chatId)
         store.set('chatUsers', data.response)
     }

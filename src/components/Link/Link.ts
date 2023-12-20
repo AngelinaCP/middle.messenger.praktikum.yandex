@@ -2,8 +2,13 @@ import {Block} from "../Block/Block";
 import {router} from "../../services";
 import {LinkTemplate} from "./Link.tmpl";
 
+interface LinkProps {
+    label: string
+    to: string
+}
+
 class Link extends Block{
-    constructor(props) {
+    constructor(props: LinkProps) {
         super({
                 ...props,
                 click: () => this.navigate()

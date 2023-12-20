@@ -107,7 +107,7 @@ export default class RegistrationPage extends Block {
     const formData = new FormData(form);
 
     AuthController.signup(formData).then(() => {
-            router.go('/chats')
+            router.go('/messenger')
       }).catch((err) => {
         this.setProps({
             error: err.response.reason

@@ -30,7 +30,7 @@ export default class LoginPage extends Block {
         type: 'submit',
         click: (e: MouseEvent) => {
             e.preventDefault()
-            router.go('/registration')
+            router.go('/sign-up')
         }
       });
     this._children.loginInput = new Input(
@@ -65,7 +65,7 @@ export default class LoginPage extends Block {
       const formData = new FormData(form);
 
       AuthController.signIn(formData).then(() => {
-            router.go('/chats')
+            router.go('/messenger')
       }).catch((err) => {
           this.setProps({
               error: err.response.reason
