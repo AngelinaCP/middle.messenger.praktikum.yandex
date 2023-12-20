@@ -90,11 +90,8 @@ export class Block<Props extends Record<string, any> = any> {
     }
     if (Object.keys(props).length > 0) {
       Object.assign(this._props, props);
-      console.log('props', props);
-      // console.log('setProps', Object.entries(this._props));
     }
     if (this._setUpdate) {
-      // this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
       this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, props);
       this._setUpdate = false;
     }

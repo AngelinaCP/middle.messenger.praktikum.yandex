@@ -13,7 +13,6 @@ class Link extends Block{
                 ...props,
                 click: (e: MouseEvent) => {
                     e.preventDefault()
-                    console.log('inClick');
                     this.navigate()
                 }
             }, 'a'

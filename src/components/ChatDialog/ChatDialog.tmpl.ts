@@ -17,6 +17,7 @@ export const ChatDialogTemplate = () => {
                               {{{addUserButton}}}
                       {{/if}}
                     {{/if}}
+                    </div>
                 </div>
                 <div class="chat-dialog__body">
                     {{#if selectedChat}}                  

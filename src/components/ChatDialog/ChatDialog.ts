@@ -88,18 +88,16 @@ export class ChatDialog extends Block {
       }
   }
 
-  // componentDidUpdate() {
-      // console.log('in cdm', this._props);
-      // this._children.avatar = new Avatar({
-      //     class: "avatar",
-      //     src: getAvatarStub(this._props.user?.avatar),
-      //     alt: "avatar",
-      // })
-  //     return true
-  // }
+  componentDidUpdate() {
+      this._children.avatar = new Avatar({
+          class: "avatar",
+          src: getAvatarStub(this._props.user?.avatar),
+          alt: "avatar",
+      })
+      return true
+  }
 
     render () {
-        // console.log('thisProps', this._props);
         return this.compile(ChatDialogTemplate(), this._props);
     }
 }

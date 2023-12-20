@@ -21,9 +21,6 @@ export function Connect<P extends Partial<any>>(Component: typeof Block<P>, mapS
             super({...props, ...mapStateToProps(store.getState())}, tag);
             store.on(StoreEvents.Updated, () => {
                 const newState = mapStateToProps(store.getState());
-                // console.log('oldState', oldState);
-                // console.log('newState', newState);
-                // console.log('isEqual(state, newState)', isEqual(oldState, newState));
                 if (!isEqual(oldState, newState)) {
                     this.setProps({...newState});
                 }

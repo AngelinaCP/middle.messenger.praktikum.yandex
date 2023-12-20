@@ -50,7 +50,6 @@ export class ChatList extends Block {
               avatar: getAvatarStub(data.avatar),
               unread_count: data.unread_count,
               click: async() => {
-                  console.log('dataId', data.id);
                   await ChatController.getChatUsers(data.id)
                   await ChatController.selectChat(data.id)
               }

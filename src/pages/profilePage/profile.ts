@@ -107,7 +107,6 @@ export class ProfilePage extends Block {
                 })
             })
             .catch(e => {
-                console.log('e', e);
                 this.setProps({
                     dataChangedMessage: e.response?.reason
                 })
