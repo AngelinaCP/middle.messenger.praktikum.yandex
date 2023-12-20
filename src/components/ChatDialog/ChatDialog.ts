@@ -2,37 +2,19 @@ import { Block } from '../Block/Block';
 import Input from '../Input/Input';
 import { ChatDialogTemplate } from './ChatDialog.tmpl';
 import { validate } from '../../validate/validate';
+import Button from "../Button";
+import {ChatController} from "../../controllers";
+import {MessagesController} from "../../controllers";
+import Avatar from "../Avatar";
+import {getAvatarStub} from "../../utils/utils";
 
-export default class ChatDialog extends Block {
+export class ChatDialog extends Block {
   constructor () {
-    super('div', {});
+    super({}, 'div');
   }
 
   init () {
     this._props.class = 'chat-dialog';
-    this._props.name = 'Марина';
-    this._props.messages = [
-      {
-        message: 'Hi!',
-        time: '13:15',
-        type: 'incoming'
-      },
-      {
-        message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        time: '13:15',
-        type: 'incoming'
-      },
-      {
-        message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        time: '13:15',
-        type: 'outcoming'
-      },
-      {
-        message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        time: '13:15',
-        type: 'incoming'
-      }
-    ];
     this._children.messageInput = new Input(
       {
         name: 'message',
@@ -46,9 +28,78 @@ export default class ChatDialog extends Block {
         }
       }
     );
+    this._children.avatar = new Avatar({
+        class: "avatar",
+        src: getAvatarStub(this._props.user?.avatar),
+        alt: "avatar",
+    })
+    this._children.addUserButton = new Button({
+        class: 'btn btn--blue',
+        label: 'Добавить пользователя',
+        type: 'submit',
+        click: () => this.addUser()
+    });
+    this._children.deleteUserButton = new Button({
+        class: 'btn btn--blue',
+        label: 'Удалить пользователя',
+        type: 'submit',
+        click: () => this.deleteUser()
+    });
+    this._children.sendButton = new Button(
+      {
+         class: 'btn--small btn--blue',
+         type: 'submit',
+         label: 'Отправить',
+         click: (event) => {
+              event.preventDefault()
+              const input = this._children.messageInput?._element as HTMLInputElement
+              if (input) {
+                  MessagesController.sendMessage(this._props.selectedChat, input.value)
+                      .catch((e) => {
+                          alert(e.response.reason)
+                      })
+                  input.value = ''
+              }
+        }
+      });
   }
 
-  render () {
-    return this.compile(ChatDialogTemplate(), this._props);
+  addUser () {
+    const userId = prompt('Введите id пользователя');
+    if (userId) {
+        const chatId = this._props.selectedChat
+        ChatController.addUser(userId, chatId)
+            .then(() => ChatController.getChatUsers(chatId))
+            .catch((e) => {
+                alert(e.response.reason)
+            })
+    }
   }
+
+  deleteUser () {
+      const userId = prompt('Введите id пользователя');
+      if (userId) {
+          const chatId = this._props.selectedChat
+          ChatController.deleteUser(userId, chatId)
+              .then(() => ChatController.getChatUsers(chatId))
+              .catch((e) => {
+                  alert(e.response.reason)
+              })
+      }
+  }
+
+  // componentDidUpdate() {
+      // console.log('in cdm', this._props);
+      // this._children.avatar = new Avatar({
+      //     class: "avatar",
+      //     src: getAvatarStub(this._props.user?.avatar),
+      //     alt: "avatar",
+      // })
+  //     return true
+  // }
+
+    render () {
+        // console.log('thisProps', this._props);
+        return this.compile(ChatDialogTemplate(), this._props);
+    }
 }

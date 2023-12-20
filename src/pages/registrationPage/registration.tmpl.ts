@@ -24,6 +24,10 @@ export const registrationTemplate = () => {
                          <div class="card__field">         
                             {{{passwordInput}}}
                         </div>
+                        
+                        <div class="u-center-text">         
+                             {{error}}
+                        </div>
                                        
                         <div class="u-center-text u-margin-top">
                             {{{firstButton}}}

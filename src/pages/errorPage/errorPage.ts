@@ -11,12 +11,12 @@ interface ErrorInfoProps {
 
 export default class ErrorInfo extends Block<ErrorInfoProps> {
   constructor (props: ErrorInfoProps) {
-    super('div', {
+    super({
       code: props.code,
       message: props.message,
       linkText: props.linkText,
       class: props.class
-    });
+    }, 'div');
   }
 
   render () {

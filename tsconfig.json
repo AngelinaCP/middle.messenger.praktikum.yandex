@@ -3,16 +3,16 @@
     "outDir": "./dist",
     "allowJs": true,
     "target": "ESNext",
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "sourceMap": true,
     "strictNullChecks": true,
     "isolatedModules": true,
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "moduleResolution":"node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["./src/**/*"]
 }

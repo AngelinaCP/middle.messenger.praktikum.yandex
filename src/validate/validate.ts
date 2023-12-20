@@ -17,10 +17,14 @@ export const isLoginValid = (fields: AuthFieldsProps): boolean => {
   return Boolean(validate(fields.login, 'login') && validate(fields.password, 'password'));
 };
 
+export const isPasswordValid = (password: string): boolean => {
+  return Boolean(validate(password, 'password'));
+};
+
 export const profileValid = (fields: AuthFieldsProps): boolean => {
-  return Boolean(validate(fields.login, 'login') && validate(fields.password, 'password') &&
+  return Boolean(validate(fields.login, 'login') &&
         validate(fields.first_name, 'name') && validate(fields.second_name, 'name') &&
-        validate(fields.email, 'email'));
+        validate(fields.email, 'email') && validate(fields.phone, 'phone'));
 };
 
 export const isValid = (type: string) => {
@@ -66,7 +70,6 @@ export const validate = (event: string | FocusEvent, type: string) => {
   if (!value) {
     return;
   }
-
   const { regExp, errorMsg } = isValid(type);
 
   const isValidValue = regExp?.test(value);

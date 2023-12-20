@@ -2,29 +2,36 @@ import { loginTemplate } from './login.tmpl';
 import { Block } from '../../components/Block/Block';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
-import { type AuthFieldsProps, isLoginValid, validate } from '../../validate/validate';
+import { validate } from '../../validate/validate';
 import './login.scss';
+import {AuthController} from "../../controllers";
+import {router} from "../../services";
 
 export default class LoginPage extends Block {
   constructor () {
-    super('div', {});
+    super({}, 'div');
   }
 
   init () {
     this._props.title = 'Вход';
     this._props.class = 'form';
-    this._children.firstButton = new Button(
+    this._props.error = '';
+    this._children.signIn = new Button(
       {
         class: 'btn btn--blue',
         label: 'Авторизоваться',
         type: 'submit',
         click: (e: MouseEvent) => { this.submit(e); }
-      });
-    this._children.secondButton = new Button(
+    });
+    this._children.signUp = new Button(
       {
         class: 'btn btn--white',
         label: 'Нет аккаунта?',
-        type: 'submit'
+        type: 'submit',
+        click: (e: MouseEvent) => {
+            e.preventDefault()
+            router.go('/registration')
+        }
       });
     this._children.loginInput = new Input(
       {
@@ -53,17 +60,19 @@ export default class LoginPage extends Block {
   }
 
   submit (e: MouseEvent) {
-    e.preventDefault();
-    const form = this._element.querySelector('form') as HTMLFormElement;
-    const formData = new FormData(form);
-    const formFields: Record<string, any> = {};
-    const authFormFields = formFields as AuthFieldsProps;
-    for (const [key, value] of formData.entries()) {
-      formFields[key] = value;
-    }
-    if (isLoginValid(authFormFields)) {
-      console.log(formFields);
-    }
+      e.preventDefault();
+      const form = this._element.querySelector('form') as HTMLFormElement;
+      const formData = new FormData(form);
+
+      AuthController.signIn(formData).then(() => {
+            router.go('/chats')
+      }).catch((err) => {
+          this.setProps({
+              error: err.response.reason
+          })
+      })
+
+
   }
 
   render () {
