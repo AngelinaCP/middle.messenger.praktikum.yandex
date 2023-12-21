@@ -88,11 +88,16 @@ export class ChatDialog extends Block {
       }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_, newProps) {
       this._children.avatar = new Avatar({
           class: "avatar",
-          src: getAvatarStub(this._props.user?.avatar),
+          src: getAvatarStub(''),
           alt: "avatar",
+      })
+      this._props.chat = this._props.chatList?.find(chat => {
+          if (chat.id === newProps.selectedChat) {
+              return chat.title
+          }
       })
       return true
   }

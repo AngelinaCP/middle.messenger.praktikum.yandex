@@ -49,6 +49,8 @@ export const isValid = (type: string) => {
       errorMsg = 'От 10 до 15 символов, состоит из цифр, может начинается с плюса.';
       break;
     case 'name':
+    case 'first_name':
+    case 'second_name':
       regExp = /^[A-ZА-Я][a-zа-яA-ZА-Я-.]{1,}$/;
       errorMsg = 'Латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис).';
       break;

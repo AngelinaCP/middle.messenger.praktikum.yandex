@@ -2,7 +2,7 @@ import { Block } from '../../components/Block/Block';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { profileTemplate } from './profile.tmpl';
-import {type AuthFieldsProps, isPasswordValid, profileValid} from '../../validate/validate';
+import {type AuthFieldsProps, isPasswordValid, profileValid, validate} from '../../validate/validate';
 import './profile.scss';
 import {User} from "../../controllers/AuthController";
 import ProfileController from "../../controllers/ProfileController";
@@ -12,7 +12,6 @@ import Avatar from "../../components/Avatar";
 import {getAvatarStub} from "../../utils/utils";
 import {AuthController} from "../../controllers";
 import Link from "../../components/Link/Link";
-
 
 const profileFields: Record<string, string> = {
     'email': 'Почта',
@@ -65,13 +64,19 @@ export class ProfilePage extends Block {
           type: 'password',
           placeholder: 'Старый пароль',
           name: 'oldPassword',
-            class: 'card__input'
+          class: 'card__input',
+          blur: (e: FocusEvent) => {
+                validate(e, 'password');
+          }
       })
       this._children.newPassword = new Input({
           type: 'password',
           placeholder: 'Новый пароль',
           name: 'newPassword',
-          class: 'card__input'
+          class: 'card__input',
+          blur: (e: FocusEvent) => {
+              validate(e, 'password');
+          }
       })
       this._children.changeAvatarInput = new Input({
           type: 'file',
@@ -87,7 +92,7 @@ export class ProfilePage extends Block {
             AuthController.logout()
         }
     });
-    this._children.profileFields = this.getProfileFields() as any
+    this._children.profileFields = this.getProfileFields(store.getState()) as any
   }
 
   changeUserInfo (e: MouseEvent) {
@@ -111,6 +116,10 @@ export class ProfilePage extends Block {
                     dataChangedMessage: e.response?.reason
                 })
             })
+    } else {
+        this.setProps({
+            dataChangedMessage: 'Поля не заполнены'
+        })
     }
   }
 
@@ -131,15 +140,22 @@ export class ProfilePage extends Block {
           && isPasswordValid(formFields['oldPassword' as string])) {
           ProfileController.changeUserPassword(formFields)
               .then(() => {
+                  console.log('Пароль успешно изменен');
                 this.setProps({
                     dataChangedMessage: 'Пароль успешно изменен'
                 })
               })
               .catch(e => {
+                  console.log('e.response.reason', e.response);
                   this.setProps({
                       dataChangedMessage: e.response.reason
                   })
               })
+      } else {
+          console.log('Поля не заполнены');
+          this.setProps({
+              dataChangedMessage: 'Поля не заполнены'
+          })
       }
   }
 
@@ -154,25 +170,34 @@ export class ProfilePage extends Block {
       }
   }
 
-  private getProfileFields(): Input[] {
-      const activeUser = store.getState().activeUser
-      return Object.keys(profileFields).map((key: keyof User) =>
+  private getProfileFields(props: any): Input[] {
+      console.log('props', props);
+      const activeUser = props.activeUser
+
+      return Object.keys(profileFields).map((key: keyof User) => {
+          return (
               new Input({
                   class: 'card__input',
                   name: key,
                   type: 'text',
                   placeholder: profileFields[key],
-                  value: activeUser[key] !== null ? activeUser[key] :  '',
+                  value: activeUser && activeUser[key] !== null ? activeUser[key] :  '',
+                  blur: (e: FocusEvent) => {
+                      validate(e, key);
+                  }
               })
-          ) || []
+
+          )
+      }) || []
   }
 
-  componentDidUpdate(): boolean {
+  componentDidUpdate(_, newProps: any): boolean {
       this._children.avatar = new Avatar({
           class: "profile__info-photo",
           src: getAvatarStub(store.getState().activeUser?.avatar),
           alt: "avatar",
       })
+      this._children.profileFields = this.getProfileFields(store.getState()) as any
       return true
   }
 

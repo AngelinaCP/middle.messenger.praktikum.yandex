@@ -39,7 +39,7 @@ export const scrollToEnd = () => {
 };
 
 export const getAvatarStub = (src: string) => {
-    if (src == null) {
+    if (src == null || !src) {
         return avatar
     }
     return `${baseUrl}/resources${src}`
