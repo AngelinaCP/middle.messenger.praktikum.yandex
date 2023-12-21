@@ -13,9 +13,9 @@ export const ChatTemplate = () => {
                     {{content}}
                 </div>
             </div>
-                <div class="chat-block__item-message--time">
-                    {{time}}
-                </div>
+            <div class="chat-block__item-message--time">
+                {{time}}
+            </div>
             <div class="chat-block__item-info">
               
                 {{#if unread_count}}
@@ -23,6 +23,6 @@ export const ChatTemplate = () => {
                         {{unread_count}}
                     </div>
                 {{/if}}
-            </div>     
+            </div> 
     `;
 };

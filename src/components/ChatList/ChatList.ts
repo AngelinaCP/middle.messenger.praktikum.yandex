@@ -5,9 +5,7 @@ import {ChatController} from "../../controllers";
 import Button from "../Button";
 import Chat from "../Chat";
 import Link from "../Link/Link";
-import {getAvatarStub} from "../../utils/utils";
 import {Chats} from "../../controllers/ChatController";
-import store from "../../services/Store";
 
 export class ChatList extends Block {
   constructor () {
@@ -22,7 +20,7 @@ export class ChatList extends Block {
         placeholder: 'Поиск',
     });
     this._props.class = 'sidebar';
-    this._children.chatList = this.getChatList()
+    this._children.chatList = this.getChatList(this._props)
     this._children.createChatButton = new Button(
         {
           class: 'btn btn--blue',
@@ -37,25 +35,16 @@ export class ChatList extends Block {
   }
 
 
-  componentDidUpdate(): boolean {
-      this._children.chatList = this.getChatList()
+  componentDidUpdate(_, newProps): boolean {
+      // console.log('newProps', newProps);
+      this._children.chatList = this.getChatList(newProps)
       return true;
   }
 
-  private getChatList() {
-      return store.getState().chatList?.map((data: Chats) => {
-          return new Chat({
-              title: data.title,
-              content: data.last_message?.content,
-              time: data.last_message ? new Date(data.last_message.time).toLocaleTimeString() : '',
-              avatar: getAvatarStub(data.avatar),
-              unread_count: data.unread_count,
-              click: async() => {
-                  await ChatController.getChatUsers(data.id)
-                  await ChatController.selectChat(data.id)
-              }
-          })
-      }) || []
+  private getChatList(props) {
+      // console.log('getChatList');
+      //here i changed from store.getState()
+      return props.chatList?.map((data: Chats) => new Chat(data)) || []
   }
 
   createChat() {

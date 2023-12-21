@@ -4,18 +4,17 @@ export const ChatDialogTemplate = () => {
                 <div class="chat-dialog__header">
                     <div class="chat-dialog__header-info">
                     {{#if selectedChat}} 
-                      {{#if user}}
                         {{{avatar}}}
                          <div class="profile-name">
-                            {{user.first_name}} {{user.second_name}}
+                            {{chat.title}}
                          </div>
                       </div>
                           <div class="chat-dialog__header-menu">
+                          {{#if user}}
                               {{{deleteUserButton}}}
-                          </div> 
-                          {{else}}
+                          {{/if}}
                               {{{addUserButton}}}
-                      {{/if}}
+                          </div> 
                     {{/if}}
                     </div>
                 </div>

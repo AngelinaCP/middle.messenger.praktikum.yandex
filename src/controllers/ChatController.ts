@@ -49,7 +49,7 @@ class ChatController {
         await ChatApi.deleteUser(user, chatId)
     }
 
-    public selectChat(chatId: number) {
+    public selectChat(chatId: any) {
         store.set('selectedChat', chatId)
     }
 
