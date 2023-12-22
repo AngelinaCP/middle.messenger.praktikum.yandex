@@ -174,7 +174,7 @@ export class ProfilePage extends Block {
       }) || []
   }
 
-  componentDidUpdate(_, newProps): boolean {
+  componentDidUpdate(): boolean {
       this._children.avatar = new Avatar({
           class: "profile__info-photo",
           src: getAvatarStub(store.getState().activeUser?.avatar),
