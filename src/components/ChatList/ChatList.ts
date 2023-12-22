@@ -6,6 +6,12 @@ import Button from "../Button";
 import Chat from "../Chat";
 import Link from "../Link/Link";
 import {Chats} from "../../controllers/ChatController";
+import {Message} from "../../controllers/MessagesController";
+
+interface ChatListProps {
+    chatList: Chats[]
+    messages: Message[];
+}
 
 export class ChatList extends Block {
   constructor () {
@@ -20,7 +26,7 @@ export class ChatList extends Block {
         placeholder: 'Поиск',
     });
     this._props.class = 'sidebar';
-    this._children.chatList = this.getChatList(this._props)
+    this._children.chatList = this.getChatList(this._props) as any
     this._children.createChatButton = new Button(
         {
           class: 'btn btn--blue',
@@ -35,15 +41,12 @@ export class ChatList extends Block {
   }
 
 
-  componentDidUpdate(_, newProps): boolean {
-      // console.log('newProps', newProps);
-      this._children.chatList = this.getChatList(newProps)
+  componentDidUpdate(_: ChatListProps, newProps: ChatListProps): boolean {
+      this._children.chatList = this.getChatList(newProps) as any
       return true;
   }
 
-  private getChatList(props) {
-      // console.log('getChatList');
-      //here i changed from store.getState()
+  private getChatList(props: ChatListProps) {
       return props.chatList?.map((data: Chats) => new Chat(data)) || []
   }
 

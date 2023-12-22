@@ -15,15 +15,15 @@ class ProfileAPI extends BaseAPI {
     }
 
     changeUserInfo(user: User) {
-        return this._http.put('/profile', user)
+        return this._http.put('/profile', {data: user})
     }
 
     changeUserPassword(passwords: Record<string, string>) {
-        return this._http.put('/password', passwords)
+        return this._http.put('/password', {data: passwords})
     }
 
     updateAvatar(formData: FormData) {
-        return this._http.put('/profile/avatar', formData)
+        return this._http.put('/profile/avatar', {data: formData})
     }
 }
 

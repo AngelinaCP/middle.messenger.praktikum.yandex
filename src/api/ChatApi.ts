@@ -23,7 +23,7 @@ class ChatAPI extends BaseAPI {
     }
 
     createChat(title: string) {
-        return this._http.post('', { title: title });
+        return this._http.post('', {data: { title: title }});
     }
 
     getChats(): Promise<XMLHttpRequest>{
@@ -31,11 +31,11 @@ class ChatAPI extends BaseAPI {
     }
 
     addUser(user: string, chatId: number) {
-        return this._http.put('/users', { users: [user], chatId});
+        return this._http.put('/users', {data: { users: [user], chatId}});
     }
 
     deleteUser(user: string, chatId: number) {
-        return this._http.delete('/users', { users: [user], chatId});
+        return this._http.delete('/users', {data: { users: [user], chatId}});
     }
 
     getChatUsers(chatId: number): Promise<XMLHttpRequest> {

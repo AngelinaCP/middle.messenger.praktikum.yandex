@@ -79,7 +79,7 @@ export class WSTransport extends EventBus {
                 }
                 this.emit(WSTransportEvents.MESSAGE, data)
             } catch (e) {
-
+                alert("Ошибка отправки сообщения")
             }
         });
 

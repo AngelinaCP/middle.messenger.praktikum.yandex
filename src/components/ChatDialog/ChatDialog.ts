@@ -7,6 +7,17 @@ import {ChatController} from "../../controllers";
 import {MessagesController} from "../../controllers";
 import Avatar from "../Avatar";
 import {getAvatarStub} from "../../utils/utils";
+import {Message} from "../../controllers/MessagesController";
+import {User} from "../../controllers/AuthController";
+import {Chats} from "../../controllers/ChatController";
+
+interface ChatDialogProps {
+    chat: string,
+    user: User,
+    chatList: Chats[]
+    selectedChat: number | undefined;
+    messages: Message[];
+}
 
 export class ChatDialog extends Block {
   constructor () {
@@ -88,13 +99,13 @@ export class ChatDialog extends Block {
       }
   }
 
-  componentDidUpdate(_, newProps) {
+  componentDidUpdate(_: ChatDialogProps, newProps: ChatDialogProps) {
       this._children.avatar = new Avatar({
           class: "avatar",
           src: getAvatarStub(''),
           alt: "avatar",
       })
-      this._props.chat = this._props.chatList?.find(chat => {
+      this._props.chat = this._props.chatList?.find((chat: Chats) => {
           if (chat.id === newProps.selectedChat) {
               return chat.title
           }
