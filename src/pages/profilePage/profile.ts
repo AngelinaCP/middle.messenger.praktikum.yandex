@@ -140,19 +140,16 @@ export class ProfilePage extends Block {
           && isPasswordValid(formFields['oldPassword' as string])) {
           ProfileController.changeUserPassword(formFields)
               .then(() => {
-                  console.log('Пароль успешно изменен');
                 this.setProps({
                     dataChangedMessage: 'Пароль успешно изменен'
                 })
               })
               .catch(e => {
-                  console.log('e.response.reason', e.response);
                   this.setProps({
                       dataChangedMessage: e.response.reason
                   })
               })
       } else {
-          console.log('Поля не заполнены');
           this.setProps({
               dataChangedMessage: 'Поля не заполнены'
           })
@@ -171,7 +168,6 @@ export class ProfilePage extends Block {
   }
 
   private getProfileFields(props: any): Input[] {
-      console.log('props', props);
       const activeUser = props.activeUser
 
       return Object.keys(profileFields).map((key: keyof User) => {
@@ -191,7 +187,7 @@ export class ProfilePage extends Block {
       }) || []
   }
 
-  componentDidUpdate(_, newProps: any): boolean {
+  componentDidUpdate(): boolean {
       this._children.avatar = new Avatar({
           class: "profile__info-photo",
           src: getAvatarStub(store.getState().activeUser?.avatar),

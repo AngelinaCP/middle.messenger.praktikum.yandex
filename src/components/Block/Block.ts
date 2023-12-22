@@ -69,10 +69,6 @@ export class Block<Props extends Record<string, any> = any> {
     const response = this.componentDidUpdate(oldProps, newProps);
 
     if (response) {
-      // console.log('---------');
-      // console.log('oldProps', oldProps.selectedChat);
-      // console.log('newProps', newProps.selectedChat);
-      // console.log('---------');
       this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
@@ -94,7 +90,6 @@ export class Block<Props extends Record<string, any> = any> {
     }
     if (Object.keys(props).length > 0) {
       Object.assign(this._props, props);
-      // console.log('inSetProps', this._props.selectedChat);
     }
     if (this._setUpdate) {
       this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, props);

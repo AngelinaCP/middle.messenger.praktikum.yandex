@@ -7,7 +7,13 @@ enum METHODS {
     DELETE = 'DELETE',
 }
 
-type HTTPMethod = (url: string, options?: unknown) => Promise<XMLHttpRequest>
+type OptionsWithoutMethod = {
+    timeout?: number
+    headers?: Record<string, string>
+    data?: unknown
+}
+
+type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
 
 interface Options {
     timeout?: number
@@ -24,20 +30,20 @@ export class HTTP {
         this._baseUrl = this._domain + baseUrl
     }
 
-    get: HTTPMethod = (url, options?: any): Promise<XMLHttpRequest> => {
-        return this.request(url, {data: options, method: METHODS.GET }, options?.timeout);
+    get: HTTPMethod = (url, options?: OptionsWithoutMethod) => {
+        return this.request(url, {data: options?.data, method: METHODS.GET }, options?.timeout);
     };
 
-    post: HTTPMethod = (url, options?: any): Promise<XMLHttpRequest> => {
-        return this.request(url, { data: options, method: METHODS.POST }, options?.timeout);
+    post: HTTPMethod = (url, options?: OptionsWithoutMethod) => {
+        return this.request(url, { data: options?.data, method: METHODS.POST }, options?.timeout);
     };
 
-    put: HTTPMethod = (url, options?: any): Promise<XMLHttpRequest> => {
-        return this.request(url, { data: options, method: METHODS.PUT }, options?.timeout);
+    put: HTTPMethod = (url, options?: OptionsWithoutMethod) => {
+        return this.request(url, { data: options?.data, method: METHODS.PUT }, options?.timeout);
     };
 
-    delete: HTTPMethod = (url, options?: any): Promise<XMLHttpRequest> => {
-        return this.request(url, { data: options, method: METHODS.DELETE }, options?.timeout);
+    delete: HTTPMethod = (url, options?: OptionsWithoutMethod) => {
+        return this.request(url, { data: options?.data, method: METHODS.DELETE }, options?.timeout);
     };
 
     request = (url: string, options: Options, timeout: number = 5000): Promise<XMLHttpRequest> => {

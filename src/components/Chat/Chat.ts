@@ -22,7 +22,6 @@ export class Chat extends Block {
     }
 
     onSelectChat(props: Chats) {
-        // console.log('propsId', props.id);
         ChatController.selectChat(props.id)
         ChatController.getChatUsers(props.id)
     }

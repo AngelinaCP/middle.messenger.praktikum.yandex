@@ -3,8 +3,8 @@ import {Message} from "../../controllers/MessagesController";
 import {ChatDialog} from "./ChatDialog";
 
 export default Connect(ChatDialog, state => {
-    const selectedChat: number = state.selectedChat
-    if (!selectedChat) {
+    const selectedChatId: number = state.selectedChat
+    if (!selectedChatId) {
         return {
             messages: [],
             selectedChat: undefined
@@ -14,8 +14,8 @@ export default Connect(ChatDialog, state => {
     const messages = state.messages || {}
     const chatUsers = state.chatUsers || []
     const activeUser = state.activeUser
-    const selectedChat2 = state.chatList.find(chat => chat.id === selectedChat)
-    const messagesByChat = (messages[selectedChat2?.id.toString() as any] || []).map((message: Message) => {
+    const selectedChat = state.chatList.find(chat => chat.id === selectedChatId)
+    const messagesByChat = (messages[selectedChat?.id.toString() as any] || []).map((message: Message) => {
         const hour = new Date(message.time).getHours();
         const min = new Date(message.time).getMinutes();
         const time =  `${hour + ':' +  min}`
@@ -29,10 +29,9 @@ export default Connect(ChatDialog, state => {
     })
 
     const user = chatUsers?.find(user => user.id !== activeUser?.id)
-    // console.log('selectedCht', selectedChat);
     return  {
         messages: messagesByChat,
-        chat: selectedChat2.title,
+        chat: selectedChat?.title,
         selectedChat: selectedChat,
         user: user,
         chatList: state.chatList
