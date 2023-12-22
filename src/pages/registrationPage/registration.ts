@@ -113,6 +113,9 @@ export default class RegistrationPage extends Block {
     AuthController.signup(formData).then(async() => {
         router.go('/messenger')
       }).catch((err) => {
+        if (err.response?.reason === "User already in system") {
+            router.go("/messenger");
+        }
         this.setProps({
             error: err.response.reason
         })
