@@ -81,8 +81,8 @@ export class ChatDialog extends Block {
         const chatId = this._props.selectedChat
         ChatController.addUser(userId, chatId)
             .then(() => ChatController.getChatUsers(chatId))
-            .catch((e) => {
-                alert(e.response.reason)
+            .catch(() => {
+                alert("Не удалось добавить пользователя")
             })
     }
   }
@@ -105,11 +105,11 @@ export class ChatDialog extends Block {
           src: getAvatarStub(''),
           alt: "avatar",
       })
-      this._props.chat = this._props.chatList?.find((chat: Chats) => {
+      this._props.chat = (this._props.chatList?.find((chat: Chats) => {
           if (chat.id === newProps.selectedChat) {
               return chat.title
           }
-      })
+      }))
       return true
   }
 

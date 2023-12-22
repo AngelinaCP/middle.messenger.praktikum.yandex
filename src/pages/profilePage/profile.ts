@@ -107,19 +107,13 @@ export class ProfilePage extends Block {
     if (profileValid(formFields as AuthFieldsProps)) {
         ProfileController.changeUserInfo(formFields as User)
             .then(() => {
-                this.setProps({
-                    dataChangedMessage: 'Данные успешно изменены'
-                })
+                alert('Профиль успешно обновлен')
             })
             .catch(e => {
-                this.setProps({
-                    dataChangedMessage: e.response?.reason
-                })
+                alert(e.response?.reason)
             })
     } else {
-        this.setProps({
-            dataChangedMessage: 'Поля не заполнены'
-        })
+        alert('Поля не заполнены')
     }
   }
 
@@ -134,25 +128,18 @@ export class ProfilePage extends Block {
               formFields[key as string] = value;
           }
       }
-
       if (formFields['newPassword' as string] !== formFields['oldPassword' as string]
           && isPasswordValid(formFields['newPassword' as string])
           && isPasswordValid(formFields['oldPassword' as string])) {
           ProfileController.changeUserPassword(formFields)
               .then(() => {
-                this.setProps({
-                    dataChangedMessage: 'Пароль успешно изменен'
-                })
+                  alert('Пароль успешно обновлен')
               })
               .catch(e => {
-                  this.setProps({
-                      dataChangedMessage: e.response.reason
-                  })
+                  alert(e.response?.reason)
               })
       } else {
-          this.setProps({
-              dataChangedMessage: 'Поля не заполнены'
-          })
+          alert('Поля некорректно заполнены')
       }
   }
 
@@ -187,7 +174,7 @@ export class ProfilePage extends Block {
       }) || []
   }
 
-  componentDidUpdate(): boolean {
+  componentDidUpdate(_, newProps): boolean {
       this._children.avatar = new Avatar({
           class: "profile__info-photo",
           src: getAvatarStub(store.getState().activeUser?.avatar),
