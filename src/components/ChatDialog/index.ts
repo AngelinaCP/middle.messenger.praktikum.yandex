@@ -32,7 +32,7 @@ export default Connect(ChatDialog, state => {
     return  {
         messages: messagesByChat,
         chat: selectedChat?.title,
-        selectedChat: selectedChat.id,
+        selectedChat: selectedChat?.id,
         user: user,
         chatList: state.chatList
     }
