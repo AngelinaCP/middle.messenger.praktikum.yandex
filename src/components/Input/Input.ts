@@ -5,6 +5,7 @@ interface InputProps {
   class?: string
   name?: string
   type: string
+  value?: string
   placeholder?: string
   blur?: (e: FocusEvent) => void
   click?: (e: FocusEvent) => void
@@ -12,7 +13,7 @@ interface InputProps {
 
 export default class Input extends Block<InputProps> {
   constructor (props: InputProps) {
-    super('input', props);
+    super(props, 'input');
   }
 
   render () {

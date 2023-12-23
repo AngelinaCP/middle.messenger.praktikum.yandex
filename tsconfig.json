@@ -12,7 +12,7 @@
     "useDefineForClassFields": true,
     "skipLibCheck": true,
     "moduleResolution":"node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["./src/**/*"]
 }

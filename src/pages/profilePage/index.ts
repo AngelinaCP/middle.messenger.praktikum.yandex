@@ -1,1 +1,7 @@
-export { default } from './profile';
+import {Connect} from "../../services";
+import {ProfilePage} from "./profile";
+
+export default Connect(ProfilePage, state => ({
+        activeUser: state.activeUser
+}))
+

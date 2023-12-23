@@ -17,10 +17,14 @@ export const isLoginValid = (fields: AuthFieldsProps): boolean => {
   return Boolean(validate(fields.login, 'login') && validate(fields.password, 'password'));
 };
 
+export const isPasswordValid = (password: string): boolean => {
+  return Boolean(validate(password, 'password'));
+};
+
 export const profileValid = (fields: AuthFieldsProps): boolean => {
-  return Boolean(validate(fields.login, 'login') && validate(fields.password, 'password') &&
+  return Boolean(validate(fields.login, 'login') &&
         validate(fields.first_name, 'name') && validate(fields.second_name, 'name') &&
-        validate(fields.email, 'email'));
+        validate(fields.email, 'email') && validate(fields.phone, 'phone'));
 };
 
 export const isValid = (type: string) => {
@@ -45,6 +49,8 @@ export const isValid = (type: string) => {
       errorMsg = 'От 10 до 15 символов, состоит из цифр, может начинается с плюса.';
       break;
     case 'name':
+    case 'first_name':
+    case 'second_name':
       regExp = /^[A-ZА-Я][a-zа-яA-ZА-Я-.]{1,}$/;
       errorMsg = 'Латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис).';
       break;
@@ -66,7 +72,6 @@ export const validate = (event: string | FocusEvent, type: string) => {
   if (!value) {
     return;
   }
-
   const { regExp, errorMsg } = isValid(type);
 
   const isValidValue = regExp?.test(value);

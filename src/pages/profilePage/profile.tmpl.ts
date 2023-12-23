@@ -1,42 +1,50 @@
-import Avatar from '../../../public/avatar.png';
 
 export const profileTemplate = () => {
   return `
-              <div class="profile__settings">
-                  <div class="profile__info">
-                      <img class="profile__info-photo" src="${Avatar}" alt="avatar"/>
-                      <p class="u-center-text u-margin-bottom">{{name}}</p>
+                  <div class="profile__back">
+                       {{{backLink}}}
                   </div>
+                  <div class="profile__settings profile__info">   
                   <form>
-                      <div class="info-block__item u-margin-bottom">
+                      <div class="u-center-text">             
+                        {{{avatar}}}
+                      </div>
+                      <div class="u-center-text u-margin-top-small">
+                        {{{changeAvatar}}}
+                      </div>
+                      <div class="u-center-text u-margin-top-small">
+                        {{{changeAvatarInput}}}   
+                      </div>
+                  </form>
+                  <form class="fields-form">
+                      <div class="info-block__item" >
+                      {{#each profileFields}}
+                         <div class="card__field">
+                            {{{this}}}
+                         </div>
+                      {{/each}}
                         <div class="card__field">
-                            {{{emailInput}}}
+                            {{{oldPassword}}}
                         </div>
                         <div class="card__field">
-                            {{{displayNameInput}}}
+                            {{{newPassword}}}
                         </div>
-                        <div class="card__field">
-                            {{{loginInput}}}
-                        </div>
-                        <div class="card__field">         
-                            {{{nameInput}}}
-                        </div>
-                         <div class="card__field">         
-                            {{{secondNameInput}}}
-                        </div>
-                         <div class="card__field">         
-                            {{{passwordInput}}}
-                        </div>
+                      </div>
+                      <div class="u-center-text u-margin-bottom" >
+                        {{{dataChangedMessage}}}
                       </div>
                       <div class="profile__actions">
                           <div class="u-center-text">
-                         {{{firstButton}}}
+                         {{{changeUserInfo}}}
+                      </div>
+                      <div class="profile__actions">
+                          <div class="u-center-text">
+                         {{{changeUserPassword}}}
                       </div>
                       <div class="u-center-text">
-                          {{{secondButton}}}
+                          {{{logout}}}
                       </div>
                   </form>
-              </div>
-          
+              </div>   
   `;
 };

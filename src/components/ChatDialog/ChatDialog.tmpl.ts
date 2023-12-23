@@ -1,49 +1,48 @@
-import Add_Plus from '../../../public/Add_Plus.png';
-import Arrow_Right from '../../../public/Arrow_Right_SM.png';
-import Avatar from '../../../public/avatar.png';
-import More_Vertical from '../../../public/More_Vertical.png';
 
 export const ChatDialogTemplate = () => {
   return `
                 <div class="chat-dialog__header">
                     <div class="chat-dialog__header-info">
-                        <img class="avatar" src="${Avatar}" alt="avatar"/>
+                    {{#if selectedChat}} 
+                        {{{avatar}}}
                          <div class="profile-name">
-                            {{name}}
+                            {{chat.title}}
                          </div>
+                      </div>
+                          <div class="chat-dialog__header-menu">
+                          {{#if user}}
+                              {{{deleteUserButton}}}
+                          {{/if}}
+                              {{{addUserButton}}}
+                          </div> 
+                    {{/if}}
                     </div>
-                   <div class="chat-dialog__header-menu">
-                        <img class="menu" src="${More_Vertical}" alt="menu"/>
-                   </div>
                 </div>
                 <div class="chat-dialog__body">
-              
-                    {{#each messages}}
-                        <div class="chat-dialog__body-message-wrapper {{type}}-message">
-                        <p class="chat-dialog__body-message">
-                            {{message}} 
-                            <span class="chat-dialog__body-message-time">
-                                {{time}}
-                            </span>
-                        </p>
-                    </div>
-                    {{/each}}
+                    {{#if selectedChat}}                  
+                      {{#each messages}}
+                          <div class="chat-dialog__body-message-wrapper {{messageType}}-message">
+                          <p class="chat-dialog__body-message">
+                              {{content}} 
+                              <span class="chat-dialog__body-message-time">
+                                  {{time}}
+                              </span>
+                          </p>
+                      </div>
+                      {{/each}}
+                      {{else}}
+                        <div class="main-message">Выберите чат или создайте новый</div>
+                      {{/if}}
                 </div>
-                
-                <form class="chat-dialog__footer">
-                    <div class="attach">
-                       <a class="round-btn">
-                            <img src="${Add_Plus}" alt="add"/>
-                        </a>
-                    </div>
-             
+                {{#if selectedChat}}  
+                <form class="chat-dialog__footer">            
                     <div class="chat-dialog__footer-input">
                         {{{messageInput}}}
                     </div>
-                    <div class="chat-dialog__footer-send-button"></div>
-                       <a class="round-btn round-btn__blue">
-                            <img src="${Arrow_Right}" alt="send"/>
-                        </a>
+                    <div class="chat-dialog__footer-send-button">
+                       {{{sendButton}}}
+                    </div>
                 </form>
+                {{/if}}
     `;
 };

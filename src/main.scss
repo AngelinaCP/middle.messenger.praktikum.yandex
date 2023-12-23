@@ -11,26 +11,39 @@ $navbar-height: 50px;
 *::before {
   margin: 0;
   padding: 0;
-
-  /* all other elements will inherit this property */
   box-sizing: inherit;
 }
 
 html {
-  /* 62% of the default browser font-size 16px */
   font-size: 62.5%;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 body {
   box-sizing: border-box;
 }
 
-#app {
-  height: 100vh;
+//#app {
+//  max-height: 100vh;
+//}
+
+.u-margin {
+  margin: 4rem;
 }
 
 .u-center-text {
   text-align: center;
+}
+
+.u-margin-left {
+  margin-left: 4rem;
+}
+
+.u-margin-top-small {
+  margin-top: 2rem;
 }
 
 .u-margin-top {
@@ -39,6 +52,10 @@ body {
 
 .u-margin-top-big {
   margin-top: 10rem;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 2rem;
 }
 
 .u-margin-bottom {
@@ -55,6 +72,12 @@ body {
   padding: 1rem 7rem;
   border: none;
   border-radius: 1rem;
+}
+
+.btn--small {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1rem;
 }
 
 .btn--blue {

@@ -2,16 +2,19 @@ import { Block } from '../../components/Block/Block';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { registrationTemplate } from './registration.tmpl';
-import { type AuthFieldsProps, registrationValid, validate } from '../../validate/validate';
+import { validate } from '../../validate/validate';
+import {router} from "../../services/Router/Router";
+import {AuthController} from "../../controllers";
 
 export default class RegistrationPage extends Block {
   constructor () {
-    super('div', {});
+    super({}, 'div');
   }
 
   init () {
     this._props.title = 'Регистрация';
     this._props.class = 'form';
+    this._props.error = '';
     this._children.firstButton = new Button(
       {
         class: 'btn btn--blue',
@@ -23,7 +26,11 @@ export default class RegistrationPage extends Block {
       {
         class: 'btn btn--white',
         label: 'Войти',
-        type: 'submit'
+        type: 'submit',
+        click: (e: MouseEvent) => {
+            e.preventDefault()
+            router.go('/login')
+        }
       });
     this._children.loginInput = new Input(
       {
@@ -99,16 +106,21 @@ export default class RegistrationPage extends Block {
 
   submit (e: MouseEvent) {
     e.preventDefault();
+
     const form = this._element.querySelector('form') as HTMLFormElement;
     const formData = new FormData(form);
-    const formFields: Record<string, any> = {};
-    const authFormFields = formFields as AuthFieldsProps;
-    for (const [key, value] of formData.entries()) {
-      formFields[key] = value;
-    }
-    if (registrationValid(authFormFields)) {
-      console.log(formFields);
-    }
+
+    AuthController.signup(formData).then(async() => {
+        router.go('/messenger')
+      }).catch((err) => {
+        if (err.response?.reason === "User already in system") {
+            router.go("/messenger");
+        }
+        this.setProps({
+            error: err.response.reason
+        })
+      })
+
   }
 
   render () {

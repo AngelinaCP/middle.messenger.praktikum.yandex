@@ -4,20 +4,22 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
+    width: 100%;
+    max-height: 100vh;
 }
 
 .sidebar {
     top: 0;
     left: 0;
-    overflow: scroll;
-    width: 43rem;
+    overflow-y: auto;
+    width: 30rem;
     height: 100vh;
     background-color: $color-white;
     color: $color-grey-dark;
     border-right: 1px solid $color-grey-light ;
 
     &__header {
-        height: 9rem;
+        height: 15rem;
         padding: 1.3rem;
     }
 
@@ -103,23 +105,25 @@
 }
 
 .profile-name {
+    width: 100%;
     font-weight: bold;
     font-size: 1.2rem;
     color: black;
 }
 
 .chat-dialog {
-    width: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    flex: 1;
+    overflow: hidden;
     &__header {
         display: flex;
         flex-direction: row;
         align-items: center;
         padding: 2rem;
-        height: 9.4vh;
+        height: 7rem;
         border-bottom: 1px solid $color-grey-light;
         justify-content: space-between;
 
@@ -132,18 +136,22 @@
             margin: 2rem;
         }
 
+        &-menu {
+            padding: 1rem;
+        }
+
     }
 
     &__body {
         flex: 1 0;
-        overflow: hidden;
-        margin: 2rem ;
+        overflow-y: auto;
+        margin-bottom: 6rem;
 
         &-message-wrapper {
             width: 100%;
             display: flex;
             flex-direction: row;
-            padding: 1rem 0;
+            padding: 1rem 2rem;
         }
 
         &-message {
@@ -155,8 +163,6 @@
             border-radius: 2rem;
             position: relative;
             word-break: break-word;
-            max-height: 100vh - 9.4vh - 7vh;
-            overflow-y: scroll;
 
             &-time {
                 position: absolute;
@@ -175,13 +181,28 @@
         align-items: center;
         height: 7vh;
         border-top: 1px solid $color-grey-light;
-        padding: 2rem;
+        padding: 3rem;
         gap: 0.8rem;
-
+        position:absolute;
+        left: 0;
+        bottom:0;
+        width: 100%;
         &-input {
             flex: 1 0 0;
         }
     }
+}
+
+.main-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e9e9f8;
+    padding: 5rem 10rem;
+    border-radius: 1rem;
+    color: white;
+    font-size: 2rem;
 }
 
 .outcoming-message {
@@ -200,7 +221,6 @@
     width: 100%;
 }
 
-
 .round-btn {
     display: flex;
     flex-shrink: 0;
@@ -214,7 +234,6 @@
 .round-btn__blue {
     background-color: $color-blue-dark;
     color: $color-white;
-
 }
 
 .menu {

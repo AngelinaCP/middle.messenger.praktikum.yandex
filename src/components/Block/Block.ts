@@ -1,6 +1,6 @@
 import Handlebars, { type TemplateDelegate } from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
-import { EventBus } from '../../services/EventBus';
+import { EventBus } from '../../services';
 
 export class Block<Props extends Record<string, any> = any> {
   static EVENTS = {
@@ -19,7 +19,7 @@ export class Block<Props extends Record<string, any> = any> {
   _eventBus;
   _events: Record<string, any> = {};
 
-  constructor (tagName = 'template', propsAndChildren: Props) {
+  constructor (propsAndChildren: Props, tagName: string = 'template') {
     const { props, children } = this.getChildren(propsAndChildren);
     const eventBus = new EventBus();
     this._eventBus = () => eventBus;
@@ -67,6 +67,7 @@ export class Block<Props extends Record<string, any> = any> {
 
   _componentDidUpdate (oldProps: Props, newProps: Props) {
     const response = this.componentDidUpdate(oldProps, newProps);
+
     if (response) {
       this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
@@ -77,12 +78,10 @@ export class Block<Props extends Record<string, any> = any> {
   }
 
   setProps = (nextProps: Props) => {
-    if (!nextProps) {
+     if (!nextProps) {
       return;
     }
-
     this._setUpdate = false;
-
     const oldProps = { ...this._props };
     const { props, children } = this.getChildren(nextProps);
 
@@ -92,9 +91,8 @@ export class Block<Props extends Record<string, any> = any> {
     if (Object.keys(props).length > 0) {
       Object.assign(this._props, props);
     }
-
     if (this._setUpdate) {
-      this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
+      this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, props);
       this._setUpdate = false;
     }
   };
@@ -119,10 +117,10 @@ export class Block<Props extends Record<string, any> = any> {
       const isObjects = this._isObject(oldValue) && this._isObject(newValue);
       if ((isObjects && !this._deepDiff(oldValue, newValue)) ||
                 (!isObjects && oldValue !== newValue)) {
-        return false;
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   _makePropsProxy (props: Props) {
@@ -153,11 +151,13 @@ export class Block<Props extends Record<string, any> = any> {
     const children: Record<string, any> = {};
     const props: Record<string, any> = {};
 
-    Object.keys(propsAndChildren).forEach((key) => {
-      if (propsAndChildren[key] instanceof Block) {
-        children[key] = propsAndChildren[key];
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else if (Array.isArray(value) && value.length && value.every((v) => v instanceof Block)) {
+        children[key] = value;
       } else {
-        props[key] = propsAndChildren[key];
+        props[key] = value;
       }
     });
     return { props: props as Props, children };
@@ -219,19 +219,33 @@ export class Block<Props extends Record<string, any> = any> {
     const propsAndStubs = { ...props };
 
     Object.entries(this._children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+      if (Array.isArray(child)) {
+        propsAndStubs[key] = child.map((child) => `<div data-id="${child._id}"></div>`)
+      } else {
+        propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+      }
     });
+
     const fragment = document.createElement('template');
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
-    Object.values(this._children).forEach(component => {
-      const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
-      if (stub == null) {
-        return;
+
+    const replaceStub = (child: Block) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+
+      if (!stub) {
+        return
       }
+      child.getContent()?.append(...Array.from(stub.childNodes))
+      stub.replaceWith(child.getContent()!)
+    }
 
-      stub.replaceWith(component.getContent()!);
-    });
-
+    Object.entries(this._children).forEach(([_, component]) => {
+      if (Array.isArray(component)) {
+        component.forEach(replaceStub)
+      } else {
+        replaceStub(component)
+      }
+    })
     return fragment.content;
   }
 }

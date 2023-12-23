@@ -12,11 +12,15 @@ export const loginTemplate = () => {
                         <div class="card__field">         
                             {{{passwordInput}}}
                         </div>
+                        
+                        <div class="u-center-text">         
+                             {{error}}
+                        </div>
                          
-                        <div class="u-center-text u-margin-top-big u-margin-bottom">
-                            {{{firstButton}}}
+                        <div class="u-center-text u-margin-top u-margin-bottom">
+                            {{{signIn}}}
                             <div class="u-center-text">
-                            {{{secondButton}}}
+                            {{{signUp}}}
                         </div>  
                     </div>
                 </form>
