@@ -40,7 +40,7 @@ export class ChatDialog extends Block {
       }
     );
     this._children.moreInfo = new Avatar({
-      class: 'avatar',
+      class: 'more-info',
       src: More_Vertical,
       alt: 'avatar'
     });
