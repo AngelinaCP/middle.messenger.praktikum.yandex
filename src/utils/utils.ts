@@ -1,5 +1,3 @@
-import avatar from "../../public/avatar.png";
-import {baseUrl} from "./urls";
 
 export type Indexed<T = unknown> = {
     [key in string]: T
@@ -37,10 +35,3 @@ export const scrollToEnd = () => {
         }
     }, 100);
 };
-
-export const getAvatarStub = (src: string) => {
-    if (src == null || !src) {
-        return avatar
-    }
-    return `${baseUrl}/resources${src}`
-}
