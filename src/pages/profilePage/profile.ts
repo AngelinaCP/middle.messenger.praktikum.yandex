@@ -9,7 +9,7 @@ import ProfileController from "../../controllers/ProfileController";
 import profileController from "../../controllers/ProfileController";
 import store from "../../services/Store";
 import Avatar from "../../components/Avatar";
-import {getAvatarStub} from "../../utils/utils";
+import {getAvatarStub} from "../../utils/avatarStub";
 import {AuthController} from "../../controllers";
 import Link from "../../components/Link/Link";
 

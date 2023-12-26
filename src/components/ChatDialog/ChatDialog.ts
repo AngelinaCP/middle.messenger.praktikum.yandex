@@ -6,16 +6,16 @@ import Button from "../Button";
 import {ChatController} from "../../controllers";
 import {MessagesController} from "../../controllers";
 import Avatar from "../Avatar";
-import {getAvatarStub} from "../../utils/utils";
 import {Message} from "../../controllers/MessagesController";
 import {User} from "../../controllers/AuthController";
 import {Chats} from "../../controllers/ChatController";
+import {getAvatarStub} from "../../utils/avatarStub";
 
 interface ChatDialogProps {
     chat: string,
     user: User,
     chatList: Chats[]
-    selectedChat: number | undefined;
+    selectedChat: number,
     messages: Message[];
 }
 
@@ -41,7 +41,7 @@ export class ChatDialog extends Block {
     );
     this._children.avatar = new Avatar({
         class: "avatar",
-        src: getAvatarStub(this._props.user?.avatar),
+        src: getAvatarStub(this._props.chat?.avatar),
         alt: "avatar",
     })
     this._children.addUserButton = new Button({
@@ -100,9 +100,10 @@ export class ChatDialog extends Block {
   }
 
   componentDidUpdate(_: ChatDialogProps, newProps: ChatDialogProps) {
+      console.log('avatar', this._props.chat?.avatar);
       this._children.avatar = new Avatar({
           class: "avatar",
-          src: getAvatarStub(''),
+          src: getAvatarStub(this._props.chat?.avatar),
           alt: "avatar",
       })
       this._props.chat = (this._props.chatList?.find((chat: Chats) => {

@@ -27,11 +27,11 @@ export default Connect(ChatDialog, state => {
             messageType: messageType
         }
     })
-
+    console.log('selectedChat', selectedChat);
     const user = chatUsers?.find(user => user.id !== activeUser?.id)
     return  {
         messages: messagesByChat,
-        chat: selectedChat?.title,
+        chat: selectedChat,
         selectedChat: selectedChat?.id,
         user: user,
         chatList: state.chatList

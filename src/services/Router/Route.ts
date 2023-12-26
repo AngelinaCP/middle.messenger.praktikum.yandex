@@ -27,7 +27,7 @@ export class Route {
             root.innerHTML = '';
             root.append(block.getContent());
         }
-        block.dispatchComponentDidMount();
+        // block?.dispatchComponentDidMount();
 
         return root;
     }
