@@ -1,9 +1,8 @@
 import {Block} from "../Block/Block";
 import {ChatTemplate} from "./Chat.tmpl";
 import {ChatController} from "../../controllers";
-import {getAvatarStub} from "../../utils/utils";
 import {Chats} from "../../controllers/ChatController";
-
+import {getAvatarStub} from "../../utils/avatarStub";
 
 export class Chat extends Block {
     constructor (props: Chats) {
@@ -12,7 +11,7 @@ export class Chat extends Block {
             title: props.title,
             content: props.last_message?.content,
             time: props.last_message ? new Date(props.last_message.time).toLocaleTimeString() : '',
-            avatar: getAvatarStub(''),
+            avatar: getAvatarStub(props.avatar),
             unread_count: props.unread_count,
             click: (e: MouseEvent) => {
                 e.stopPropagation()
