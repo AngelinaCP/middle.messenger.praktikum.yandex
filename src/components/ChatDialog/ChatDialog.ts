@@ -76,6 +76,7 @@ export class ChatDialog extends Block {
       id: 'files',
       type: 'file',
       placeholder: 'Добавьте файл',
+      class: 'input--invisible',
       name: 'avatar',
       change: () => {
         this.changeChatAvatar();
@@ -128,8 +129,7 @@ export class ChatDialog extends Block {
     if (this._props.selectedChat) {
       ChatController.deleteChat(this._props.selectedChat)
         .then(async () => { await ChatController.getChats(); })
-        .catch((err) => {
-          console.log('err', err);
+        .catch(() => {
           alert('Не удалось удалить чат');
         });
     }
@@ -137,7 +137,6 @@ export class ChatDialog extends Block {
 
   changeChatAvatar () {
     const avatar = document.getElementsByName('avatar')[0] as HTMLInputElement;
-    console.log('avatar', avatar);
     const file = avatar.files?.[0];
     if (file) {
       const formData = new FormData();

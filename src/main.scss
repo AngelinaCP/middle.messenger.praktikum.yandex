@@ -128,11 +128,11 @@ body {
   display: block;
 }
 
-input[type="file"] {
+.input--invisible[type="file"] {
   display: none;
 }
 
-input[type="file"]::file-selector-button {
+.input--invisible[type="file"]::file-selector-button {
   display: none;
 }
 
