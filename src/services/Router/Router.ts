@@ -18,7 +18,6 @@ class Router {
   }
 
   use (pathname: string, block: BlockClass) {
-    console.log('blick ', block);
     const route = new Route(pathname, block, '.app');
     this.routes.push(route);
     return this;
