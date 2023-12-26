@@ -1,5 +1,5 @@
 export const AvatarTmpl = () => {
-    return `
+  return `
         
     `;
 };

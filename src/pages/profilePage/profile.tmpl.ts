@@ -1,4 +1,3 @@
-
 export const profileTemplate = () => {
   return `
                   <div class="profile__back">

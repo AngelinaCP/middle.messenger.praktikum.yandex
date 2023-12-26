@@ -1,29 +1,28 @@
-import { HTTP, BaseAPI } from "../services";
+import { HTTP, BaseAPI } from '../services';
 
 class AuthApi extends BaseAPI {
+  _http: HTTP;
 
-    _http: HTTP;
+  constructor () {
+    super();
+    this._http = new HTTP('/auth');
+  }
 
-    constructor() {
-        super();
-        this._http = new HTTP('/auth')
-    }
+  public async signup (data: unknown) {
+    return await this._http.post('/signup', { data });
+  }
 
-    public signup(data: unknown) {
-        return this._http.post('/signup', {data: data})
-    }
+  public async signin (data: unknown) {
+    return await this._http.post('/signin', { data });
+  }
 
-    public signin(data: unknown) {
-        return this._http.post('/signin', {data: data})
-    }
+  public async getUserInfo () {
+    return await this._http.get('/user');
+  }
 
-    public getUserInfo() {
-        return this._http.get('/user')
-    }
-
-    public logout() {
-        return this._http.post('/logout')
-    }
+  public async logout () {
+    return await this._http.post('/logout');
+  }
 }
 
-export default new AuthApi()
+export default new AuthApi();

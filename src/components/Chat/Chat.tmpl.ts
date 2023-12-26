@@ -1,9 +1,7 @@
-import Avatar from '../../../public/avatar.png';
-
 export const ChatTemplate = () => {
-    return `
+  return `
             <div class="chat-block__item-avatar">
-                <img class="avatar" src="${Avatar}" alt="avatar"/>
+                {{{avatar}}}
             </div>
             <div class="chat-block__item-message">
                 <div class="profile-name">

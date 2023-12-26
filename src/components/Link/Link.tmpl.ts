@@ -1,6 +1,5 @@
-
 export const LinkTemplate = () => {
-    return `
+  return `
        {{label}}
     `;
 };

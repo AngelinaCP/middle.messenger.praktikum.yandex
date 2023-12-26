@@ -78,7 +78,7 @@ export class Block<Props extends Record<string, any> = any> {
   }
 
   setProps = (nextProps: Props) => {
-     if (!nextProps) {
+    if (!nextProps) {
       return;
     }
     this._setUpdate = false;
@@ -220,9 +220,9 @@ export class Block<Props extends Record<string, any> = any> {
 
     Object.entries(this._children).forEach(([key, child]) => {
       if (Array.isArray(child)) {
-        propsAndStubs[key] = child.map((child) => `<div data-id="${child._id}"></div>`)
+        propsAndStubs[key] = child.map((child) => `<div data-id="${child._id}"></div>`);
       } else {
-        propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+        propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
       }
     });
 
@@ -230,22 +230,22 @@ export class Block<Props extends Record<string, any> = any> {
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     const replaceStub = (child: Block) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
 
       if (!stub) {
-        return
+        return;
       }
-      child.getContent()?.append(...Array.from(stub.childNodes))
-      stub.replaceWith(child.getContent()!)
-    }
+      child.getContent()?.append(...Array.from(stub.childNodes));
+      stub.replaceWith(child.getContent()!);
+    };
 
     Object.entries(this._children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
-        component.forEach(replaceStub)
+        component.forEach(replaceStub);
       } else {
-        replaceStub(component)
+        replaceStub(component);
       }
-    })
+    });
     return fragment.content;
   }
 }

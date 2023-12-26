@@ -15,6 +15,7 @@
     "skipLibCheck": true,
     "moduleResolution":"node",
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
     "strict": true,
     "lib": [
       "ESNext",

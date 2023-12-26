@@ -1,2 +1,2 @@
 export { Connect } from './Connect';
-export { default }  from './Store';
+export { default } from './Store';
