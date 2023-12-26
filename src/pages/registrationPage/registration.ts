@@ -3,8 +3,8 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { registrationTemplate } from './registration.tmpl';
 import { validate } from '../../validate/validate';
-import {router} from "../../services/Router/Router";
-import {AuthController} from "../../controllers";
+import { router } from '../../services/Router/Router';
+import { AuthController } from '../../controllers';
 
 export default class RegistrationPage extends Block {
   constructor () {
@@ -28,8 +28,8 @@ export default class RegistrationPage extends Block {
         label: 'Войти',
         type: 'submit',
         click: (e: MouseEvent) => {
-            e.preventDefault()
-            router.go('/login')
+          e.preventDefault();
+          router.go('/login');
         }
       });
     this._children.loginInput = new Input(
@@ -110,17 +110,16 @@ export default class RegistrationPage extends Block {
     const form = this._element.querySelector('form') as HTMLFormElement;
     const formData = new FormData(form);
 
-    AuthController.signup(formData).then(async() => {
-        router.go('/messenger')
-      }).catch((err) => {
-        if (err.response?.reason === "User already in system") {
-            router.go("/messenger");
-        }
-        this.setProps({
-            error: err.response.reason
-        })
-      })
-
+    AuthController.signup(formData).then(async () => {
+      router.go('/messenger');
+    }).catch((err) => {
+      if (err.response?.reason === 'User already in system') {
+        router.go('/messenger');
+      }
+      this.setProps({
+        error: err.response.reason
+      });
+    });
   }
 
   render () {

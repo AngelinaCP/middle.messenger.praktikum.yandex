@@ -2,6 +2,7 @@ import { Block } from '../Block/Block';
 import { InputTemplate } from './Input.tmpl';
 
 interface InputProps {
+  id?: string
   class?: string
   name?: string
   type: string
@@ -9,6 +10,7 @@ interface InputProps {
   placeholder?: string
   blur?: (e: FocusEvent) => void
   click?: (e: FocusEvent) => void
+  change?: (e: FocusEvent) => void
 }
 
 export default class Input extends Block<InputProps> {

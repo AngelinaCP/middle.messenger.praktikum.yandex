@@ -4,8 +4,8 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { validate } from '../../validate/validate';
 import './login.scss';
-import {AuthController} from "../../controllers";
-import {router} from "../../services";
+import { AuthController } from '../../controllers';
+import { router } from '../../services';
 
 export default class LoginPage extends Block {
   constructor () {
@@ -22,15 +22,15 @@ export default class LoginPage extends Block {
         label: 'Авторизоваться',
         type: 'submit',
         click: (e: MouseEvent) => { this.submit(e); }
-    });
+      });
     this._children.signUp = new Button(
       {
         class: 'btn btn--white',
         label: 'Нет аккаунта?',
         type: 'submit',
         click: (e: MouseEvent) => {
-            e.preventDefault()
-            router.go('/sign-up')
+          e.preventDefault();
+          router.go('/sign-up');
         }
       });
     this._children.loginInput = new Input(
@@ -60,22 +60,20 @@ export default class LoginPage extends Block {
   }
 
   submit (e: MouseEvent) {
-      e.preventDefault();
-      const form = this._element.querySelector('form') as HTMLFormElement;
-      const formData = new FormData(form);
+    e.preventDefault();
+    const form = this._element.querySelector('form') as HTMLFormElement;
+    const formData = new FormData(form);
 
-      AuthController.signIn(formData).then(() => {
-            router.go('/messenger')
-      }).catch((err) => {
-          if (err.response?.reason === "User already in system") {
-              router.go("/messenger");
-          }
-          this.setProps({
-              error: err.response.reason
-          })
-      })
-
-
+    AuthController.signIn(formData).then(() => {
+      router.go('/messenger');
+    }).catch((err) => {
+      if (err.response?.reason === 'User already in system') {
+        router.go('/messenger');
+      }
+      this.setProps({
+        error: err.response.reason
+      });
+    });
   }
 
   render () {

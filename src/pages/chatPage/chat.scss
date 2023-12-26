@@ -118,6 +118,7 @@
     justify-content: space-between;
     flex: 1;
     overflow: hidden;
+
     &__header {
         display: flex;
         flex-direction: row;
@@ -138,8 +139,8 @@
 
         &-menu {
             padding: 1rem;
+            font-size: 1.3rem;
         }
-
     }
 
     &__body {
@@ -187,6 +188,7 @@
         left: 0;
         bottom:0;
         width: 100%;
+
         &-input {
             flex: 1 0 0;
         }
