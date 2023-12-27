@@ -19,11 +19,28 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use('/400', NotFound)
     .use('/500', ServerError);
 
+  let isLoggedIn = true;
+
+  switch (window.location.pathname) {
+    case '/':
+    case '/login':
+    case '/sign-up':
+      isLoggedIn = false;
+      break;
+    default: break;
+  }
+
   try {
     await AuthController.getUserInfo();
     router.start();
     await ChatController.getChats();
+    if (!isLoggedIn) {
+      router.go('/messenger');
+    }
   } catch (e) {
-    router.go('/');
+    router.start();
+    if (isLoggedIn) {
+      router.go('/');
+    }
   }
 });

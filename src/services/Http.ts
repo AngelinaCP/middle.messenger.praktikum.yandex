@@ -30,19 +30,19 @@ export class HTTP {
     this._baseUrl = this._domain + baseUrl;
   }
 
-  get: HTTPMethod = async (url, options?: OptionsWithoutMethod) => {
+  get: HTTPMethod = async (url, options) => {
     return await this.request(url, { data: options?.data, method: METHODS.GET }, options?.timeout);
   };
 
-  post: HTTPMethod = async (url, options?: OptionsWithoutMethod) => {
+  post: HTTPMethod = async (url, options) => {
     return await this.request(url, { data: options?.data, method: METHODS.POST }, options?.timeout);
   };
 
-  put: HTTPMethod = async (url, options?: OptionsWithoutMethod) => {
+  put: HTTPMethod = async (url, options) => {
     return await this.request(url, { data: options?.data, method: METHODS.PUT }, options?.timeout);
   };
 
-  delete: HTTPMethod = async (url, options?: OptionsWithoutMethod) => {
+  delete: HTTPMethod = async (url, options) => {
     return await this.request(url, { data: options?.data, method: METHODS.DELETE }, options?.timeout);
   };
 
