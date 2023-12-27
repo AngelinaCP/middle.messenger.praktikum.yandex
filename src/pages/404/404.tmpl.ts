@@ -1,5 +1,5 @@
 export const NotFoundTemplate = () => {
-    return `
+  return `
        {{{page}}}
     `;
 };
