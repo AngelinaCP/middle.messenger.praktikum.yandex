@@ -12,6 +12,7 @@
     "lint:ts:fix": "eslint \"**/*.{ts, tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "lint": "npx eslint \"**/*.{ts, tsx}\" && npx stylelint \"**/*.scss\"",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -46,11 +47,6 @@
     "typescript": "^5.1.6",
     "vite": "^4.4.6",
     "vite-plugin-handlebars": "^1.6.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test"
-    }
   },
   "dependencies": {
     "handlebars": "^4.7.7",
