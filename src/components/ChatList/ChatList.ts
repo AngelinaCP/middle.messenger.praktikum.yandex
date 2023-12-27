@@ -38,13 +38,10 @@ export class ChatList extends Block {
       label: 'Профиль',
       to: '/settings'
     });
-    console.log('this.getChatList(this._props)', this.getChatList(this._props));
-    console.log('this._children.chatList', this._children.chatList);
   }
 
   componentDidUpdate (_: ChatListProps, newProps: ChatListProps): boolean {
     this._children.chatList = this.getChatList(newProps) as any;
-    console.log('this._children.chatList2', this._children.chatList);
     return true;
   }
 
