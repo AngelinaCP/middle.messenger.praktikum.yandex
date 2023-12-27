@@ -6,8 +6,8 @@ import ChatPage from './pages/chatPage';
 import { router } from './services/Router/Router';
 import AuthController from './controllers/AuthController';
 import { ChatController } from './controllers';
-import NotFound from "./pages/404";
-import ServerError from "./pages/500";
+import NotFound from './pages/404';
+import ServerError from './pages/500';
 
 window.addEventListener('DOMContentLoaded', async () => {
   router

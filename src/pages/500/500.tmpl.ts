@@ -1,5 +1,5 @@
-export const ServerErrorTemplate  = () => {
-    return `
+export const ServerErrorTemplate = () => {
+  return `
        {{{page}}}
     `;
 };
