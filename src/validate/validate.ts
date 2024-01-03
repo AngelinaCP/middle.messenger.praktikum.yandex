@@ -67,7 +67,7 @@ export const isValid = (type: string) => {
 };
 
 export const validate = (event: string | FocusEvent, type: string) => {
-  const value: string = (typeof event === 'object' ? (event['target'] as HTMLInputElement).value : event) as string;
+  const value: string = (typeof event === 'object' ? (event['target'] as HTMLInputElement).value : event);
 
   if (!value) {
     return;

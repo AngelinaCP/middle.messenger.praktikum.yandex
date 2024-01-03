@@ -1,51 +1,57 @@
-import {HTTP, BaseAPI} from "../services";
-import {User} from "../controllers/AuthController";
+import { HTTP, BaseAPI } from '../services';
+import { type User } from '../controllers/AuthController';
 
 export interface ChatInfo {
-    id: number;
-    title: string;
-    avatar: string;
-    unread_count: number;
-    last_message: {
-        user: User,
-        time: string;
-        content: string;
-    }
+  id: number
+  title: string
+  avatar: string
+  unread_count: number
+  last_message: {
+    user: User
+    time: string
+    content: string
+  }
 }
 
 class ChatAPI extends BaseAPI {
+  _http: HTTP;
 
-    _http: HTTP;
+  constructor () {
+    super();
+    this._http = new HTTP('/chats');
+  }
 
-    constructor() {
-        super();
-        this._http = new HTTP('/chats')
-    }
+  async createChat (title: string) {
+    return await this._http.post('', { data: { title } });
+  }
 
-    createChat(title: string) {
-        return this._http.post('', {data: { title: title }});
-    }
+  async deleteChat (chatId: string) {
+    return await this._http.delete('', { data: { chatId } });
+  }
 
-    getChats(): Promise<XMLHttpRequest>{
-        return this._http.get('');
-    }
+  async getChats (): Promise<XMLHttpRequest> {
+    return await this._http.get('');
+  }
 
-    addUser(user: string, chatId: number) {
-        return this._http.put('/users', {data: { users: [user], chatId}});
-    }
+  async addUser (user: string, chatId: number) {
+    return await this._http.put('/users', { data: { users: [user], chatId } });
+  }
 
-    deleteUser(user: string, chatId: number) {
-        return this._http.delete('/users', {data: { users: [user], chatId}});
-    }
+  async deleteUser (user: string, chatId: number) {
+    return await this._http.delete('/users', { data: { users: [user], chatId } });
+  }
 
-    getChatUsers(chatId: number): Promise<XMLHttpRequest> {
-        return this._http.get(`/${chatId}/users`)
-    }
+  async getChatUsers (chatId: number): Promise<XMLHttpRequest> {
+    return await this._http.get(`/${chatId}/users`);
+  }
 
-    getToken(id: number) {
-        return this._http.post(`/token/${id}`)
-    }
+  async getToken (id: number) {
+    return await this._http.post(`/token/${id}`);
+  }
+
+  async updateAvatar (formData: FormData) {
+    return await this._http.put('/avatar', { data: formData });
+  }
 }
 
-export default new ChatAPI()
-
+export default new ChatAPI();

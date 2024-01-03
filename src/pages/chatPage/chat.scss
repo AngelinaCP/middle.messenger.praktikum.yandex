@@ -104,6 +104,14 @@
     background-repeat: no-repeat;
 }
 
+.more-info {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+}
+
 .profile-name {
     width: 100%;
     font-weight: bold;
@@ -118,6 +126,7 @@
     justify-content: space-between;
     flex: 1;
     overflow: hidden;
+
     &__header {
         display: flex;
         flex-direction: row;
@@ -138,8 +147,8 @@
 
         &-menu {
             padding: 1rem;
+            font-size: 1.3rem;
         }
-
     }
 
     &__body {
@@ -187,6 +196,7 @@
         left: 0;
         bottom:0;
         width: 100%;
+
         &-input {
             flex: 1 0 0;
         }

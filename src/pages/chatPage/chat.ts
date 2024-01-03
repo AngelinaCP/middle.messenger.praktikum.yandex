@@ -2,9 +2,9 @@ import { Block } from '../../components/Block/Block';
 import { chatTemplate } from './chat.tmpl';
 import ChatDialog from '../../components/ChatDialog';
 import './chat.scss';
-import ChatsList from  "../../components/ChatList";
-import {ChatController} from "../../controllers";
-import store from "../../services/Store";
+import ChatsList from '../../components/ChatList';
+import { ChatController } from '../../controllers';
+import store from '../../services/Store';
 
 export default class ChatPage extends Block {
   constructor () {
@@ -16,7 +16,7 @@ export default class ChatPage extends Block {
     this._children.chatList = new ChatsList({}, 'div');
     this._children.chatDialog = new ChatDialog({}, 'div');
     if (!store.getState().chatList) {
-      ChatController.getChats()
+      ChatController.getChats();
     }
   }
 

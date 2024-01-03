@@ -1,4 +1,4 @@
-import {Connect} from "../../services";
-import {ErrorInfo} from "./errorPage";
+import { Connect } from '../../services';
+import { ErrorInfo } from './errorPage';
 
-export default Connect(ErrorInfo, state => state || {})
+export default Connect(ErrorInfo, state => state || {});

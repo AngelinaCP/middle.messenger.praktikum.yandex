@@ -2,7 +2,9 @@
   "compilerOptions": {
     "outDir": "./dist",
     "allowJs": true,
-    "target": "ESNext",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "module": "commonjs",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -13,6 +15,19 @@
     "skipLibCheck": true,
     "moduleResolution":"node",
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
   },
-  "include": ["./src/**/*"]
+  "include": ["src/**/*", "./src/**/*/*.spec.ts"],
+  "exclude": ["node_modules", "dist/**/*", "./mochaSetup.js"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+    "files": true
+  }
 }

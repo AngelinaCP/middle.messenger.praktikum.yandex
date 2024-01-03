@@ -1,6 +1,4 @@
-
 export const ChatListTemplate = () => {
-
   return `
         <div class="sidebar__header">
             <h2 class="profile-link">{{{profileLink}}}</h2>

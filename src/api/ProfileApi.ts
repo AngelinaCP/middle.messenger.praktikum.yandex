@@ -1,30 +1,29 @@
-import {HTTP, BaseAPI} from "../services";
-import {User} from "../controllers/AuthController";
+import { HTTP, BaseAPI } from '../services';
+import { type User } from '../controllers/AuthController';
 
 class ProfileAPI extends BaseAPI {
+  _http: HTTP;
 
-    _http: HTTP;
+  constructor () {
+    super();
+    this._http = new HTTP('/user');
+  }
 
-    constructor() {
-        super();
-        this._http = new HTTP('/user')
-    }
+  async getUser (userId: string) {
+    return await this._http.get(`/${userId}`);
+  }
 
-    getUser(userId: string) {
-        return this._http.get(`/${userId}`)
-    }
+  async changeUserInfo (user: User) {
+    return await this._http.put('/profile', { data: user });
+  }
 
-    changeUserInfo(user: User) {
-        return this._http.put('/profile', {data: user})
-    }
+  async changeUserPassword (passwords: Record<string, string>) {
+    return await this._http.put('/password', { data: passwords });
+  }
 
-    changeUserPassword(passwords: Record<string, string>) {
-        return this._http.put('/password', {data: passwords})
-    }
-
-    updateAvatar(formData: FormData) {
-        return this._http.put('/profile/avatar', {data: formData})
-    }
+  async updateAvatar (formData: FormData) {
+    return await this._http.put('/profile/avatar', { data: formData });
+  }
 }
 
-export default new ProfileAPI()
+export default new ProfileAPI();

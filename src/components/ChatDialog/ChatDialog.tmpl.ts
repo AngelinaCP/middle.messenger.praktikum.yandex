@@ -1,4 +1,3 @@
-
 export const ChatDialogTemplate = () => {
   return `
                 <div class="chat-dialog__header">
@@ -10,10 +9,17 @@ export const ChatDialogTemplate = () => {
                          </div>
                       </div>
                           <div class="chat-dialog__header-menu">
-                          {{#if user}}
-                              {{{deleteUserButton}}}
-                          {{/if}}
-                              {{{addUserButton}}}
+                            <div class="dropdown">
+                                {{{moreInfo}}}
+                                 <div class="dropdown-content" style="float:right;">
+                                    <ul>
+                                      <li>{{{addUserButton}}}</li>
+                                      <li>{{{deleteUserButton}}}</li>
+                                      <li onclick="files.click()">{{{changeChatAvatar}}}{{{changeAvatarInput}}}</li>
+                                      <li>{{{deleteChat}}}</li>
+                                    </ul>          
+                                </div>
+                            </div>
                           </div> 
                     {{/if}}
                     </div>
